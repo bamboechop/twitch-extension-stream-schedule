@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+@utility max-w-twitch-iframe {
+  max-width: 318px;
+}
+
+:root {
+  --color-background: #ffffff;
+  --color-text: #2c3e50;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #181818;
+    --color-text: rgba(235, 235, 235, 0.64);
+  }
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+}
