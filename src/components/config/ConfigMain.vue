@@ -10,10 +10,12 @@
             <template v-if="selectedView === 'general'">
               <ConfigGeneral
                 :amount-of-schedule-items="amountOfScheduleItems"
+                :panel-title="panelTitle"
                 :show-category="showCategory"
                 :show-times="showTimes"
                 :show-title="showTitle"
                 @update:amount-of-schedule-items="emits('update:amount-of-schedule-items', $event)"
+                @update:panel-title="emits('update:panel-title', $event)"
                 @update:show-category="emits('update:show-category', $event)"
                 @update:show-times="emits('update:show-times', $event)"
                 @update:show-title="emits('update:show-title', $event)" />
@@ -88,6 +90,7 @@ defineProps<{
   fontSize: number
   headerBackgroundColor: string
   headerFontColor: string
+  panelTitle: string
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean
@@ -108,6 +111,7 @@ const emits = defineEmits<{
   (e: 'update:font-size', value: number): void
   (e: 'update:header-background-color', value: string): void
   (e: 'update:header-font-color', value: string): void
+  (e: 'update:panel-title', value: string): void
   (e: 'update:schedule-button-background-color', value: string): void
   (e: 'update:schedule-button-font-color', value: string): void
   (e: 'update:show-category', value: boolean): void

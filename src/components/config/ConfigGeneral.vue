@@ -25,7 +25,7 @@
           :checked="showTitle"
           @change="emits('update:showTitle', $event.target.checked)" />
         <CustomLabel id="showTitle">
-          Show title
+          Show stream title
         </CustomLabel>
       </div>
       <div class="flex flex-row gap-x-[8px]">
@@ -35,7 +35,7 @@
           :checked="showCategory"
           @change="emits('update:showCategory', $event.target.checked)" />
         <CustomLabel id="showCategory">
-          Show category
+          Show stream category
         </CustomLabel>
       </div>
       <div class="flex flex-row gap-x-[8px]">
@@ -45,8 +45,19 @@
           :checked="showTimes"
           @change="emits('update:showTimes', $event.target.checked)" />
         <CustomLabel id="showTimes">
-          Show times
+          Show stream times
         </CustomLabel>
+      </div>
+      <div class="flex flex-col gap-y-[8px]">
+        <CustomLabel id="panelTitle">
+          Panel title
+        </CustomLabel>
+        <input
+          type="text"
+          id="panelTitle"
+          placeholder="Streamplan"
+          :value="panelTitle"
+          @input="emits('update:panelTitle', $event.target.value.trim())" />
       </div>
     </div>
   </div>
@@ -57,6 +68,7 @@ import CustomLabel from '../common/CustomLabel.vue'
 
 defineProps<{
   amountOfScheduleItems: number
+  panelTitle: string
   showCategory: boolean
   showTimes: boolean
   showTitle: boolean
@@ -64,6 +76,7 @@ defineProps<{
 
 const emits = defineEmits<{
   (e: 'update:amountOfScheduleItems', value: number): void
+  (e: 'update:panelTitle', value: string): void
   (e: 'update:showCategory', value: boolean): void
   (e: 'update:showTimes', value: boolean): void
   (e: 'update:showTitle', value: boolean): void

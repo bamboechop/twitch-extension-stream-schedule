@@ -18,6 +18,7 @@ const config = ref<TwitchExtensionConfiguration>({
   amountOfScheduleItems: 3,
   fontFamily: 'Roboto',
   fontSize: 16,
+  panelTitle: '',
   showCategory: true,
   showTimes: true,
   showTitle: true,

@@ -77,6 +77,7 @@ export interface TwitchExtensionConfiguration extends TwitchExtensionThemeConfig
   amountOfScheduleItems: number;
   fontFamily: string;
   fontSize: number;
+  panelTitle: string;
   showCategory: boolean;
   showTimes: boolean;
   showTitle: boolean;

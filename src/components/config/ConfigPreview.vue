@@ -18,6 +18,7 @@
       :font-size="fontSize"
       :header-background-color="headerBackgroundColor"
       :header-font-color="headerFontColor"
+      :panel-title="panelTitle"
       :schedule-button-background-color="scheduleButtonBackgroundColor"
       :schedule-button-font-color="scheduleButtonFontColor"
       :schedule-items="schedule"
@@ -47,6 +48,7 @@ defineProps<{
   fontSize: number
   headerBackgroundColor: string
   headerFontColor: string
+  panelTitle: string
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean

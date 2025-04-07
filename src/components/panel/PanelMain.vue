@@ -2,7 +2,7 @@
   <component
     :is="tag"
     class="relative font-(--extension-font-family) overflow-auto flex flex-col gap-y-4 max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen mx-auto w-full bg-(--extension-color-background) text-(--extension-color-text)">
-    <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">Streamplan</h1>
+    <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || 'Streamplan' }}</h1>
     <div class="flex flex-col gap-y-4 h-full p-3 pt-0">
       <template v-if="scheduleItems.length > 0">
         <template v-for="group in scheduleItems" :key="group.date">
@@ -97,6 +97,7 @@ const {
   fontSize: number
   headerBackgroundColor: string
   headerFontColor: string
+  panelTitle: string
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   scheduleItems: GroupedScheduleItem[]

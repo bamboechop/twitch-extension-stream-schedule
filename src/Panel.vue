@@ -9,6 +9,7 @@
       :font-size="config.fontSize"
       :header-background-color="config.headerBackgroundColor"
       :header-font-color="config.headerFontColor"
+      :panel-title="config.panelTitle"
       :schedule-button-background-color="config.scheduleButtonBackgroundColor"
       :schedule-button-font-color="config.scheduleButtonFontColor"
       :schedule-items="schedule"
