@@ -19,4 +19,11 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   ...pluginOxlint.configs['flat/recommended'],
+  {
+    rules: {
+      'vue/multi-word-component-names': ['error', {
+        ignores: ['Config', 'Panel']
+      }]
+    }
+  }
 )

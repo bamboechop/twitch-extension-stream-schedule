@@ -1,23 +1,41 @@
 @import 'tailwindcss';
 
-@utility max-w-twitch-iframe {
+@utility max-h-twitch-iframe-height {
+  max-height: 500px;
+}
+
+@utility max-w-twitch-iframe-width {
   max-width: 318px;
 }
 
 :root {
-  --color-background: #ffffff;
-  --color-text: #2c3e50;
+  /* CSS Variable Documentation & Fallback Theme
+   * These values serve two purposes:
+   * 1. Document all available CSS variables in the theming system
+   * 2. Provide a decent-looking fallback theme during initial load
+   * Note: These values will be overwritten by the configuration loaded from Twitch
+   * To change the default theme, edit the values below and keep twitch.composable.ts in sync
+   * Not changing the values below will still update the default theme but there'd be inconsistencies
+   */
+  --extension-color-background: #222;
+  --extension-color-day-border: #62e9ff;
+  --extension-color-header-background: #111;
+  --extension-color-header-font-color: #eee;
+  --extension-color-schedule-button-background: #62e9ff;
+  --extension-color-schedule-button-font-color: #111;
+  --extension-color-text: #eee;
+  --extension-color-time-font-color: #ccc;
+  --extension-font-family: 'Roboto', sans-serif;
+  --extension-font-size: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #181818;
-    --color-text: rgba(235, 235, 235, 0.64);
-  }
+html {
+  font-family: var(--extension-font-family);
+  font-size: var(--extension-font-size);
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-text);
+  background: #181818;
+  color: rgba(235, 235, 235, 0.64);
   min-height: 100vh;
 }
