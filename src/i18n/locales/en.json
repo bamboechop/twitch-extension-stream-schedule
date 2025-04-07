@@ -31,6 +31,14 @@
     "appearance": {
       "title": "Appearance",
       "theme": "Theme",
+      "backgroundColor": "Background color",
+      "dayBorderColor": "Day border color",
+      "fontColor": "Font color",
+      "headerBackgroundColor": "Header background color",
+      "headerFontColor": "Header font color",
+      "scheduleButtonBackgroundColor": "Schedule button background color",
+      "scheduleButtonFontColor": "Schedule button font color",
+      "timeFontColor": "Time font color",
       "themes": {
         "default": "Default",
         "neonNights": "Neon Nights",

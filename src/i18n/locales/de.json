@@ -10,6 +10,14 @@
   "config": {
     "appearance": {
       "theme": "Design",
+      "backgroundColor": "Hintergrundfarbe",
+      "dayBorderColor": "Tagesrandfarbe",
+      "fontColor": "Schriftfarbe",
+      "headerBackgroundColor": "Kopfzeilen-Hintergrundfarbe",
+      "headerFontColor": "Kopfzeilen-Schriftfarbe",
+      "scheduleButtonBackgroundColor": "Zeitplan-Button-Hintergrundfarbe",
+      "scheduleButtonFontColor": "Zeitplan-Button-Schriftfarbe",
+      "timeFontColor": "Zeit-Schriftfarbe",
       "themes": {
         "crystalClear": "Crystal Clear",
         "custom": "Benutzerdefiniert",

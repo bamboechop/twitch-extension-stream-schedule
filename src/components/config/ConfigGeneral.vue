@@ -13,7 +13,7 @@
           max="5"
           step="1"
           class="w-full"
-          @input="emits('update:amountOfScheduleItems', parseInt($event.target.value))" />
+          @input="emits('update:amountOfScheduleItems', parseInt(($event.target as HTMLInputElement).value))" />
         <span class="text-[16px] w-8 text-center">{{ amountOfScheduleItems }}</span>
       </div>
     </div>
@@ -23,7 +23,7 @@
           type="checkbox"
           id="showTitle"
           :checked="showTitle"
-          @change="emits('update:showTitle', $event.target.checked)" />
+          @change="emits('update:showTitle', ($event.target as HTMLInputElement).checked)" />
         <CustomLabel id="showTitle">
           {{ t('config.general.showStreamTitle') }}
         </CustomLabel>
@@ -33,7 +33,7 @@
           type="checkbox"
           id="showCategory"
           :checked="showCategory"
-          @change="emits('update:showCategory', $event.target.checked)" />
+          @change="emits('update:showCategory', ($event.target as HTMLInputElement).checked)" />
         <CustomLabel id="showCategory">
           {{ t('config.general.showStreamCategory') }}
         </CustomLabel>
@@ -43,7 +43,7 @@
           type="checkbox"
           id="showTimes"
           :checked="showTimes"
-          @change="emits('update:showTimes', $event.target.checked)" />
+          @change="emits('update:showTimes', ($event.target as HTMLInputElement).checked)" />
         <CustomLabel id="showTimes">
           {{ t('config.general.showStreamTimes') }}
         </CustomLabel>
@@ -57,7 +57,7 @@
           id="panelTitle"
           :placeholder="t('config.general.panelTitlePlaceholder')"
           :value="panelTitle"
-          @input="emits('update:panelTitle', $event.target.value.trim())" />
+          @input="emits('update:panelTitle', ($event.target as HTMLInputElement).value.trim())" />
       </div>
     </div>
   </div>

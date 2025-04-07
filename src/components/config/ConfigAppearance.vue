@@ -3,9 +3,12 @@
     <CustomLabel id="theme">
       {{ t('config.appearance.theme') }}
     </CustomLabel>
-    <select id="theme" :value="theme" @change="emits('update:theme', $event.target.value)">
+    <select id="theme" :value="theme" @change="emits('update:theme', ($event.target as HTMLSelectElement).value)">
       <option v-for="(label, value) in themes" :key="value" :value="value">
         {{ t(`config.appearance.themes.${value}`) }}
+      </option>
+      <option v-if="theme === 'custom'" value="custom">
+        {{ t('config.appearance.themes.custom') }}
       </option>
     </select>
     <div v-for="config in colorConfigs" :key="config.id" class="flex flex-col gap-y-[8px]">
@@ -37,6 +40,7 @@
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CustomLabel from '../common/CustomLabel.vue'
+import { themes } from '@/common/themes';
 
 const { t } = useI18n({ useScope: 'global' })
 
@@ -53,15 +57,8 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (e: 'update:backgroundColor', value: string): void
-  (e: 'update:dayBorderColor', value: string): void
-  (e: 'update:fontColor', value: string): void
-  (e: 'update:headerBackgroundColor', value: string): void
-  (e: 'update:headerFontColor', value: string): void
-  (e: 'update:scheduleButtonBackgroundColor', value: string): void
-  (e: 'update:scheduleButtonFontColor', value: string): void
   (e: 'update:theme', value: string): void
-  (e: 'update:timeFontColor', value: string): void
+  (e: `update:${keyof typeof colorValues.value}`, value: string): void
 }>()
 
 const colorConfigs = [
