@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-y-[16px]">
     <div class="flex flex-col gap-y-[8px]">
       <CustomLabel id="fontFamily">
-        Font family
+        {{ t('config.typography.fontFamily') }}
       </CustomLabel>
       <select
         id="fontFamily"
@@ -16,7 +16,7 @@
     </div>
     <div class="flex flex-col gap-y-[8px]">
       <CustomLabel id="fontSize">
-        Font size
+        {{ t('config.typography.fontSize') }}
       </CustomLabel>
       <input
         type="number"
@@ -32,7 +32,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import CustomLabel from '../common/CustomLabel.vue'
+
+const { t } = useI18n({ useScope: 'global' })
 
 const fonts = ref([
   'Roboto',

@@ -1,11 +1,11 @@
 <template>
   <aside class="flex flex-col gap-[16px]">
-    <p class="font-sans text-[14px] italic">See how your stream schedule will look like</p>
+    <p class="font-sans text-[14px] italic">{{ t('config.previewSchedule') }}</p>
     <template v-if="!twitchLoading">
       <template v-if="schedule.length === 0 && broadcasterName">
         <p class="font-sans text-[16px] font-bold text-yellow-500">
-          To see how the streams will look like, you need to add some streams to your schedule.<br />
-          <a :href="scheduleConfigurationLink" target="_blank" class="text-blue-500 font-normal underline">Go to schedule</a>
+          {{ t('schedule.addStreamsToSchedule') }}<br />
+          <a :href="scheduleConfigurationLink" target="_blank" class="text-blue-500 font-normal underline">{{ t('schedule.goToSchedule') }}</a>
         </p>
       </template>
     <PanelMain
@@ -36,9 +36,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n'
 import PanelMain from '../panel/PanelMain.vue'
 import { useTwitch } from '@/composables/twitch.composable';
 import CustomLoader from '../common/CustomLoader.vue';
+
+const { t } = useI18n({ useScope: 'global' })
 
 defineProps<{
   backgroundColor: string

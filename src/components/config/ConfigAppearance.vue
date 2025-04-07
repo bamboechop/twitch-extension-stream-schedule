@@ -1,22 +1,16 @@
 <template>
   <div class="flex flex-col gap-y-[8px]">
     <CustomLabel id="theme">
-      Theme
+      {{ t('config.appearance.theme') }}
     </CustomLabel>
     <select id="theme" :value="theme" @change="emits('update:theme', $event.target.value)">
-      <option value="default">Default</option>
-      <option value="neonNights">Neon Nights</option>
-      <option value="mintChocolate">Mint Chocolate</option>
-      <option value="sunsetVibes">Sunset Vibes</option>
-      <option value="royalPurple">Royal Purple</option>
-      <option value="enchantedForest">Enchanted Forest</option>
-      <option value="retroWave">RetroWave</option>
-      <option value="crystalClear">Crystal Clear</option>
-      <option value="custom">Custom</option>
+      <option v-for="(label, value) in themes" :key="value" :value="value">
+        {{ t(`config.appearance.themes.${value}`) }}
+      </option>
     </select>
     <div v-for="config in colorConfigs" :key="config.id" class="flex flex-col gap-y-[8px]">
       <CustomLabel :id="config.id">
-        {{ config.label }}
+        {{ t(`config.appearance.${config.id}`) }}
       </CustomLabel>
       <div class="flex items-center gap-x-[8px]">
         <input
@@ -41,7 +35,10 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import CustomLabel from '../common/CustomLabel.vue'
+
+const { t } = useI18n({ useScope: 'global' })
 
 const props = defineProps<{
   backgroundColor: string

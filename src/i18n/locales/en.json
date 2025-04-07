@@ -1,0 +1,52 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "saved": "Saved",
+    "loading": "Loading..."
+  },
+  "schedule": {
+    "title": "Stream Schedule",
+    "addStream": "Add Stream",
+    "noStreams": "No streams scheduled",
+    "viewFullSchedule": "View full schedule",
+    "timesInLocalTimezone": "Times shown are in your local timezone",
+    "addStreamsToSchedule": "To see how the streams will look like, you need to add some streams to your schedule.",
+    "goToSchedule": "Go to schedule"
+  },
+  "config": {
+    "customizeSchedule": "Customize how your stream schedule looks like",
+    "previewSchedule": "See how your stream schedule will look like",
+    "general": {
+      "title": "General",
+      "numberOfItems": "Number of schedule items (1-5)",
+      "showStreamTitle": "Show stream title",
+      "showStreamCategory": "Show stream category",
+      "showStreamTimes": "Show stream times",
+      "panelTitle": "Panel title",
+      "panelTitlePlaceholder": "Stream Schedule"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "theme": "Theme",
+      "themes": {
+        "default": "Default",
+        "neonNights": "Neon Nights",
+        "mintChocolate": "Mint Chocolate",
+        "sunsetVibes": "Sunset Vibes",
+        "royalPurple": "Royal Purple",
+        "enchantedForest": "Enchanted Forest",
+        "retroWave": "RetroWave",
+        "crystalClear": "Crystal Clear",
+        "custom": "Custom"
+      }
+    },
+    "typography": {
+      "title": "Typography",
+      "fontFamily": "Font family",
+      "fontSize": "Font size"
+    }
+  }
+}

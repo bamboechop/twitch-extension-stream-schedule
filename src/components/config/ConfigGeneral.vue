@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-y-[16px]">
     <div class="flex flex-col gap-y-[8px]">
       <CustomLabel id="amountOfScheduleItems">
-        Number of schedule items (1-5)
+        {{ t('config.general.numberOfItems') }}
       </CustomLabel>
       <div class="flex items-center gap-x-4">
         <input
@@ -25,7 +25,7 @@
           :checked="showTitle"
           @change="emits('update:showTitle', $event.target.checked)" />
         <CustomLabel id="showTitle">
-          Show stream title
+          {{ t('config.general.showStreamTitle') }}
         </CustomLabel>
       </div>
       <div class="flex flex-row gap-x-[8px]">
@@ -35,7 +35,7 @@
           :checked="showCategory"
           @change="emits('update:showCategory', $event.target.checked)" />
         <CustomLabel id="showCategory">
-          Show stream category
+          {{ t('config.general.showStreamCategory') }}
         </CustomLabel>
       </div>
       <div class="flex flex-row gap-x-[8px]">
@@ -45,17 +45,17 @@
           :checked="showTimes"
           @change="emits('update:showTimes', $event.target.checked)" />
         <CustomLabel id="showTimes">
-          Show stream times
+          {{ t('config.general.showStreamTimes') }}
         </CustomLabel>
       </div>
       <div class="flex flex-col gap-y-[8px]">
         <CustomLabel id="panelTitle">
-          Panel title
+          {{ t('config.general.panelTitle') }}
         </CustomLabel>
         <input
           type="text"
           id="panelTitle"
-          placeholder="Streamplan"
+          :placeholder="t('config.general.panelTitlePlaceholder')"
           :value="panelTitle"
           @input="emits('update:panelTitle', $event.target.value.trim())" />
       </div>
@@ -64,7 +64,10 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import CustomLabel from '../common/CustomLabel.vue'
+
+const { t } = useI18n({ useScope: 'global' })
 
 defineProps<{
   amountOfScheduleItems: number

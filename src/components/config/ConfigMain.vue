@@ -1,6 +1,6 @@
 <template>
   <main class="font-sans">
-      <p class="font-sans text-[14px] italic mb-[16px]">Customize how your stream schedule looks like</p>
+      <p class="font-sans text-[14px] italic mb-[16px]">{{ t('config.customizeSchedule') }}</p>
       <div class="rounded-lg border flex flex-col gap-y-[16px] p-[24px]">
         <div class="shadow-sm flex flex-col gap-x-[24px]">
           <div class="flex flex-col gap-y-[16px]">
@@ -61,11 +61,11 @@
             @click="!showSuccessMessage ? saveConfig() : undefined">
             <template v-if="showSuccessMessage">
               <Check :size="16" />
-              Saved
+              {{ t('common.saved') }}
             </template>
             <template v-if="!showSuccessMessage">
               <Save :size="16" />
-              Save
+              {{ t('common.save') }}
             </template>
           </button>
         </div>
@@ -75,11 +75,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Check, Save } from 'lucide-vue-next'
 import ConfigPanelSelection from './ConfigPanelSelection.vue'
 import ConfigGeneral from './ConfigGeneral.vue'
 import ConfigAppearance from './ConfigAppearance.vue'
 import ConfigTypography from './ConfigTypography.vue'
+
+const { t } = useI18n({ useScope: 'global' })
 
 defineProps<{
   amountOfScheduleItems: number

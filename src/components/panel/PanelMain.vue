@@ -2,7 +2,7 @@
   <component
     :is="tag"
     class="relative font-(--extension-font-family) overflow-auto flex flex-col gap-y-4 max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen mx-auto w-full bg-(--extension-color-background) text-(--extension-color-text)">
-    <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || 'Streamplan' }}</h1>
+    <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || t('schedule.title') }}</h1>
     <div class="flex flex-col gap-y-4 h-full p-3 pt-0">
       <template v-if="scheduleItems.length > 0">
         <template v-for="group in scheduleItems" :key="group.date">
@@ -46,20 +46,20 @@
         </template>
       </template>
       <template v-if="scheduleItems.length === 0">
-        <p class="text-center text-gray-500">No scheduled streams</p>
+        <p class="text-center text-gray-500">{{ t('schedule.noStreams') }}</p>
       </template>
     </div>
-      <div class="sticky bottom-0 left-0 right-0 flex flex-col gap-y-1 items-center justify-center px-3 py-2 bg-(--extension-color-background)">
-        <p class="flex items-center gap-x-1 text-xs text-(--extension-color-text)">
-          <AlarmClock :size="fontSize * 0.75" />
-          Times shown are in your local timezone
-        </p>
-        <template v-if="scheduleLink">
-          <button
+    <div class="sticky bottom-0 left-0 right-0 flex flex-col gap-y-1 items-center justify-center px-3 py-2 bg-(--extension-color-background)">
+      <p class="flex items-center gap-x-1 text-xs text-(--extension-color-text)">
+        <AlarmClock :size="fontSize * 0.75" />
+        {{ t('schedule.timesInLocalTimezone') }}
+      </p>
+      <template v-if="scheduleLink">
+        <button
           class="bg-(--extension-color-schedule-button-background) cursor-pointer text-(--extension-color-schedule-button-font-color) font-semibold text-xs flex items-center gap-x-1 px-4 py-2 rounded-md"
           type="button"
           @click="openSchedule">
-          View full schedule
+          {{ t('schedule.viewFullSchedule') }}
         </button>
       </template>
     </div>
@@ -69,8 +69,11 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import { useUrlSearchParams } from '@vueuse/core';
+import { useI18n } from 'vue-i18n'
 import { AlarmClock, Tag } from 'lucide-vue-next'
 import type { GroupedScheduleItem, TwitchUrlSearchParams } from '@/common/interfaces/twitch.interface'
+
+const { t } = useI18n({ useScope: 'global' })
 
 const {
   backgroundColor,
@@ -154,7 +157,7 @@ watch(() => fontColor, (value) => {
 watch(() => fontFamily, (value) => {
   const googleFont = document.getElementById('googleFont')
   if (googleFont) {
-    googleFont.href = `https://fonts.googleapis.com/css2?family=${value.replace(' ', '+')}:wght@400;500;700&display=swap`
+    (googleFont as HTMLLinkElement).href = `https://fonts.googleapis.com/css2?family=${value.replace(' ', '+')}:wght@400;500;700&display=swap`
   }
   document.documentElement.style.setProperty('--extension-font-family', `${value}, sans-serif`)
 }, { immediate: true })

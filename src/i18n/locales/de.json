@@ -1,0 +1,52 @@
+{
+  "common": {
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "loading": "Lädt...",
+    "save": "Speichern",
+    "saved": "Gespeichert"
+  },
+  "config": {
+    "appearance": {
+      "theme": "Design",
+      "themes": {
+        "crystalClear": "Crystal Clear",
+        "custom": "Benutzerdefiniert",
+        "default": "Default",
+        "enchantedForest": "Enchanted Forest",
+        "mintChocolate": "Mint Chocolate",
+        "neonNights": "Neon Nights",
+        "retroWave": "RetroWave",
+        "royalPurple": "Royal Purple",
+        "sunsetVibes": "Sunset Vibes"
+      },
+      "title": "Erscheinungsbild"
+    },
+    "customizeSchedule": "Passe an, wie dein Stream-Zeitplan aussehen soll",
+    "general": {
+      "numberOfItems": "Anzahl der Zeitplan-Einträge (1-5)",
+      "panelTitle": "Panel-Titel",
+      "panelTitlePlaceholder": "Streamplan",
+      "showStreamCategory": "Stream-Kategorie anzeigen",
+      "showStreamTimes": "Stream-Zeiten anzeigen",
+      "showStreamTitle": "Stream-Titel anzeigen",
+      "title": "Allgemein"
+    },
+    "previewSchedule": "Sieh dir an, wie dein Stream-Zeitplan aussehen wird",
+    "typography": {
+      "fontFamily": "Schriftart",
+      "fontSize": "Schriftgröße",
+      "title": "Typografie"
+    }
+  },
+  "schedule": {
+    "addStream": "Stream hinzufügen",
+    "addStreamsToSchedule": "Um zu sehen, wie die Streams aussehen werden, musst du einige Streams zu deinem Zeitplan hinzufügen.",
+    "goToSchedule": "Zum Zeitplan",
+    "noStreams": "Keine Streams geplant",
+    "timesInLocalTimezone": "Zeiten werden in deiner lokalen Zeitzone angezeigt",
+    "title": "Stream-Zeitplan",
+    "viewFullSchedule": "Vollständigen Zeitplan anzeigen"
+  }
+}
