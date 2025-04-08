@@ -27,7 +27,8 @@
           id="panelTitle"
           :placeholder="t('config.general.panelTitlePlaceholder')"
           :value="panelTitle"
-          @input="emits('update:panelTitle', ($event.target as HTMLInputElement).value.trim())" />
+          @input="emits('update:panelTitle', ($event.target as HTMLInputElement).value.trim())"
+          class="w-full text-[16px] bg-neutral-800 text-gray-100 border border-neutral-600 rounded-sm px-[12px] py-[8px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
       </div>
       <div class="flex flex-row gap-x-[8px]">
         <input

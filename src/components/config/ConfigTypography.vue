@@ -8,8 +8,8 @@
         id="fontFamily"
         :value="fontFamily"
         @change="emits('update:fontFamily', ($event.target as HTMLSelectElement).value)"
-        class="w-full text-[16px]">
-        <option v-for="font in fonts" :key="font" :value="font">
+        class="w-full text-[16px] bg-neutral-800 text-gray-100 border border-neutral-600 rounded-sm px-[12px] py-[8px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+        <option v-for="font in fonts" :key="font" :value="font" class="bg-neutral-800 text-gray-100">
           {{ font }}
         </option>
       </select>

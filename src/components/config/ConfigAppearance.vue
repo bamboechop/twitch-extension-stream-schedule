@@ -1,37 +1,45 @@
 <template>
-  <div class="flex flex-col gap-y-[8px]">
-    <CustomLabel id="theme">
-      {{ t('config.appearance.theme') }}
-    </CustomLabel>
-    <select id="theme" :value="theme" @change="emits('update:theme', ($event.target as HTMLSelectElement).value)">
-      <option v-for="(label, value) in themes" :key="value" :value="value">
-        {{ t(`config.appearance.themes.${value}`) }}
-      </option>
-      <option v-if="theme === 'custom'" value="custom">
-        {{ t('config.appearance.themes.custom') }}
-      </option>
-    </select>
-    <div v-for="config in colorConfigs" :key="config.id" class="flex flex-col gap-y-[8px]">
-      <CustomLabel :id="config.id">
-        {{ t(`config.appearance.${config.id}`) }}
+  <div class="flex flex-col gap-y-[16px]">
+    <div class="flex flex-col gap-y-[8px]">
+      <CustomLabel id="theme">
+        {{ t('config.appearance.theme') }}
       </CustomLabel>
-      <div class="flex items-center gap-x-[8px]">
-        <input
-          class="w-[40px] h-[24px] text-[14px]"
-          type="color"
-          :id="config.id"
-          :value="colorValues[config.id]"
-          @input="handleColorChange($event, config.id)"
-        />
-        <input
-          class="w-full text-[14px]"
-          type="text"
-          :id="config.id"
-          :value="props[config.id]"
-          @input="handleTextInput($event, config.id)"
-          @blur="handleBlur($event, config.id)"
-        />
-      </div>
+      <select
+        id="theme"
+        :value="theme"
+        @change="emits('update:theme', ($event.target as HTMLSelectElement).value)"
+        class="w-full text-[16px] bg-neutral-800 text-gray-100 border border-neutral-600 rounded-sm px-[12px] py-[8px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+        <option v-for="(label, value) in themes" :key="value" :value="value" class="bg-neutral-800 text-gray-100">
+          {{ t(`config.appearance.themes.${value}`) }}
+        </option>
+        <option v-if="theme === 'custom'" value="custom" class="bg-neutral-800 text-gray-100">
+          {{ t('config.appearance.themes.custom') }}
+        </option>
+      </select>
+    </div>
+    <div class="flex flex-col gap-y-[8px]">
+      <div v-for="config in colorConfigs" :key="config.id" class="flex flex-col gap-y-[8px]">
+        <CustomLabel :id="config.id">
+          {{ t(`config.appearance.${config.id}`) }}
+        </CustomLabel>
+        <div class="flex items-center gap-x-[8px]">
+          <input
+            class="w-[78px] h-[36px] text-[14px] border-neutral-600"
+            type="color"
+            :id="config.id"
+            :value="colorValues[config.id]"
+            @input="handleColorChange($event, config.id)"
+          />
+          <input
+            class="w-full text-[14px] bg-neutral-800 text-gray-100 border border-neutral-600 rounded-sm px-[12px] py-[8px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            type="text"
+            :id="config.id"
+            :value="props[config.id]"
+            @input="handleTextInput($event, config.id)"
+            @blur="handleBlur($event, config.id)"
+          />
+        </div>
+     </div>
     </div>
   </div>
 </template>
