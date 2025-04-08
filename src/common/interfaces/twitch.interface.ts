@@ -9,6 +9,7 @@ export interface TwitchStreamScheduleSegment {
   is_recurring: boolean;
   start_time: string; // in RFC3339 format
   title: string;
+  usernames: string[];
 }
 
 export interface GroupedScheduleItem {
