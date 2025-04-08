@@ -55,7 +55,7 @@
     "typography": {
       "title": "Typography",
       "fontFamily": "Font family",
-      "fontSize": "Font size"
+      "fontSize": "Font size (12px - 18px)"
     }
   }
 }

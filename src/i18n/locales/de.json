@@ -45,7 +45,7 @@
     "previewSchedule": "Sieh dir an, wie dein Stream-Zeitplan aussehen wird",
     "typography": {
       "fontFamily": "Schriftart",
-      "fontSize": "Schriftgröße",
+      "fontSize": "Schriftgröße (12px - 18px)",
       "title": "Typografie"
     }
   },
