@@ -2,14 +2,14 @@ import type { TwitchExtensionTheme, TwitchExtensionThemeConfiguration } from '..
 
 export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExtensionThemeConfiguration> = {
   default: {
-    backgroundColor: '#222',
+    backgroundColor: '#222222',
     dayBorderColor: '#62e9ff',
-    fontColor: '#eee',
-    headerBackgroundColor: '#111',
-    headerFontColor: '#eee',
+    fontColor: '#eeeeee',
+    headerBackgroundColor: '#111111',
+    headerFontColor: '#eeeeee',
     scheduleButtonBackgroundColor: '#62e9ff',
-    scheduleButtonFontColor: '#111',
-    timeFontColor: '#ccc',
+    scheduleButtonFontColor: '#111111',
+    timeFontColor: '#cccccc',
   },
   neonNights: {
     backgroundColor: '#120e29',

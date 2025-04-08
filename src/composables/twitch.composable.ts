@@ -6,6 +6,7 @@ import type {
   TwitchUserResponse,
   GroupedScheduleItem,
   TwitchExtensionTheme,
+  TwitchExtensionThemeConfiguration,
 } from '@/common/interfaces/twitch.interface';
 import { ref, watch } from 'vue';
 import { themes } from '@/common/themes';
@@ -22,6 +23,7 @@ const config = ref<TwitchExtensionConfiguration>({
   showCategory: true,
   showTimes: true,
   showTitle: true,
+  showUsernames: true,
   theme: 'default',
 });
 const darkMode = ref<boolean>(false);
@@ -144,6 +146,28 @@ export const useTwitch = () => {
     }
   }
 
+  const expandShortHex = (color: string) => {
+    // If it's already a 6-digit hex, return as is
+    if (color.length === 7) return color
+
+    // For 3-digit hex, expand each digit
+    const hex = color.slice(1) // Remove #
+    return `#${hex.split('').map(char => char + char).join('')}`
+  }
+
+  const expandThemeColors = (themeConfig: TwitchExtensionThemeConfiguration): TwitchExtensionThemeConfiguration => {
+    return {
+      backgroundColor: expandShortHex(themeConfig.backgroundColor),
+      dayBorderColor: expandShortHex(themeConfig.dayBorderColor),
+      fontColor: expandShortHex(themeConfig.fontColor),
+      headerBackgroundColor: expandShortHex(themeConfig.headerBackgroundColor),
+      headerFontColor: expandShortHex(themeConfig.headerFontColor),
+      scheduleButtonBackgroundColor: expandShortHex(themeConfig.scheduleButtonBackgroundColor),
+      scheduleButtonFontColor: expandShortHex(themeConfig.scheduleButtonFontColor),
+      timeFontColor: expandShortHex(themeConfig.timeFontColor),
+    }
+  }
+
   const updateTheme = (themeName: TwitchExtensionTheme) => {
     // Skip if trying to switch to 'custom' as custom isn't a predefined theme
     if (themeName === 'custom') {
@@ -155,16 +179,21 @@ export const useTwitch = () => {
     if (themes[themeName]) {
       // Apply all theme properties but keep non-theme specific settings
       const currentConfig = { ...config.value };
+      const expandedTheme = expandThemeColors(themes[themeName]);
+
       config.value = {
         ...currentConfig,
-        ...themes[themeName],
+        ...expandedTheme,
         theme: themeName,
         // Preserve user settings that aren't part of the theme
         amountOfScheduleItems: currentConfig.amountOfScheduleItems,
+        fontFamily: currentConfig.fontFamily,
         fontSize: currentConfig.fontSize,
+        panelTitle: currentConfig.panelTitle,
         showCategory: currentConfig.showCategory,
         showTimes: currentConfig.showTimes,
         showTitle: currentConfig.showTitle,
+        showUsernames: currentConfig.showUsernames,
       };
     }
   }
@@ -174,9 +203,15 @@ export const useTwitch = () => {
     if (twitchConfig?.content) {
       try {
         const parsedConfig = JSON.parse(twitchConfig.content) as TwitchExtensionConfiguration;
+        // Expand any short hex codes in the stored configuration
+        const expandedConfig = {
+          ...parsedConfig,
+          ...(parsedConfig.theme !== 'custom' ? expandThemeColors(parsedConfig) : {}),
+        };
+
         config.value = {
           ...config.value,
-          ...parsedConfig,
+          ...expandedConfig,
         };
       } catch (error) {
         console.error('Error parsing config:', error);

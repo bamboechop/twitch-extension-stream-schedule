@@ -81,6 +81,7 @@ export interface TwitchExtensionConfiguration extends TwitchExtensionThemeConfig
   showCategory: boolean;
   showTimes: boolean;
   showTitle: boolean;
+  showUsernames: boolean;
   theme: TwitchExtensionTheme;
 }
 
