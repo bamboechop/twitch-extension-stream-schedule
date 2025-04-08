@@ -22,7 +22,7 @@
         type="number"
         id="fontSize"
         min="12"
-        max="24"
+        max="18"
         :value="fontSize"
         @blur="handleFontSizeBlur"
         class="w-full text-[16px] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [&]:[-moz-appearance:textfield]" />
@@ -70,7 +70,7 @@ const handleFontSizeBlur = (event: Event) => {
   if (isNaN(value)) {
     value = 12
   } else {
-    value = Math.min(Math.max(value, 12), 24)
+    value = Math.min(Math.max(value, 12), 18)
   }
 
   input.value = value.toString()
