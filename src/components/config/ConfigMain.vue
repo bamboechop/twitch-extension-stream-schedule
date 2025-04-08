@@ -14,11 +14,13 @@
                 :show-category="showCategory"
                 :show-times="showTimes"
                 :show-title="showTitle"
+                :show-usernames="showUsernames"
                 @update:amount-of-schedule-items="emits('update:amount-of-schedule-items', $event)"
                 @update:panel-title="emits('update:panel-title', $event)"
                 @update:show-category="emits('update:show-category', $event)"
                 @update:show-times="emits('update:show-times', $event)"
-                @update:show-title="emits('update:show-title', $event)" />
+                @update:show-title="emits('update:show-title', $event)"
+                @update:show-usernames="emits('update:show-usernames', $event)" />
             </template>
             <template v-if="selectedView === 'appearance'">
               <ConfigAppearance

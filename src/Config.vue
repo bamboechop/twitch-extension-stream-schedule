@@ -16,6 +16,7 @@
       :show-success-message="showSuccessMessage"
       :show-times="config.showTimes"
       :show-title="config.showTitle"
+      :show-usernames="config.showUsernames"
       :time-font-color="config.timeFontColor"
       :theme="config.theme"
       @save-config="save"
@@ -33,6 +34,7 @@
       @update:show-category="config.showCategory = $event"
       @update:show-times="config.showTimes = $event"
       @update:show-title="config.showTitle = $event"
+      @update:show-usernames="config.showUsernames = $event"
       @update:theme="handleThemeChange"
       @update:time-font-color="config.timeFontColor = $event" />
     <ConfigPreview
@@ -49,6 +51,7 @@
       :show-category="config.showCategory"
       :show-times="config.showTimes"
       :show-title="config.showTitle"
+      :show-usernames="config.showUsernames"
       :theme="config.theme"
       :time-font-color="config.timeFontColor" />
   </section>

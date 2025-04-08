@@ -25,6 +25,7 @@
       :show-category="showCategory"
       :show-times="showTimes"
       :show-title="showTitle"
+      :show-usernames="showUsernames"
       :time-font-color="timeFontColor"
       tag="section" />
     </template>
@@ -57,6 +58,7 @@ defineProps<{
   showCategory: boolean
   showTimes: boolean
   showTitle: boolean
+  showUsernames: boolean
   timeFontColor: string
 }>()
 

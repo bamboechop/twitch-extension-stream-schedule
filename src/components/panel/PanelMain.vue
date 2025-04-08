@@ -20,12 +20,20 @@
                     </template>
                     <template v-if="showCategory && item.category">
                       <div class="flex items-center gap-x-2">
-                        <Tag :size="fontSize" />
+                        <Tag class="shrink-0" :size="fontSize" />
                         <h4
                           class="font-bold"
                           :class="{ 'text-lg': !showTitle, 'text-md': showTitle }">
                           {{ item.category.name }}
                         </h4>
+                      </div>
+                    </template>
+                    <template v-if="showUsernames && item.usernames.length > 0">
+                      <div class="flex items-center gap-x-2">
+                        <User class="shrink-0" :size="fontSize" />
+                        <p class="text-xs">
+                          {{ item.usernames.join(', ') }}
+                        </p>
                       </div>
                     </template>
                   </div>
@@ -49,7 +57,7 @@
         <p class="text-center text-gray-500">{{ t('schedule.noStreams') }}</p>
       </template>
     </div>
-    <div class="sticky bottom-0 left-0 right-0 flex flex-col gap-y-1 items-center justify-center px-3 py-2 bg-(--extension-color-background)">
+    <div class="sticky bottom-0 left-0 right-0 flex flex-col gap-y-1 items-center justify-center px-3 py-2 bg-(--extension-color-background) shadow-[0_-4px_6px_rgba(0,0,0,0.25)]">
       <p class="flex items-center gap-x-1 text-xs text-(--extension-color-text)">
         <AlarmClock :size="fontSize * 0.75" />
         {{ t('schedule.timesInLocalTimezone') }}
@@ -70,7 +78,7 @@
 import { computed, watch } from 'vue'
 import { useUrlSearchParams } from '@vueuse/core';
 import { useI18n } from 'vue-i18n'
-import { AlarmClock, Tag } from 'lucide-vue-next'
+import { AlarmClock, Tag, User } from 'lucide-vue-next'
 import type { GroupedScheduleItem, TwitchUrlSearchParams } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
@@ -89,6 +97,7 @@ const {
   showCategory,
   showTimes,
   showTitle,
+  showUsernames,
   tag = 'main',
   timeFontColor,
 } = defineProps<{
@@ -107,6 +116,7 @@ const {
   showCategory: boolean
   showTimes: boolean
   showTitle: boolean
+  showUsernames: boolean
   tag?: string
   timeFontColor: string
 }>()

@@ -25,6 +25,7 @@
       "showStreamTitle": "Show stream title",
       "showStreamCategory": "Show stream category",
       "showStreamTimes": "Show stream times",
+      "showStreamUsernames": "Show usernames of people you play with during a stream",
       "panelTitle": "Panel title",
       "panelTitlePlaceholder": "Stream Schedule"
     },

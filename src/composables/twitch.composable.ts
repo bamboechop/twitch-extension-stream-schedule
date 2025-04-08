@@ -34,8 +34,27 @@ export const useTwitch = () => {
     // First, take only the number of items we want to show
     const limitedItems = [...allScheduleItems.value].slice(0, limit);
 
+    // Process each item to extract usernames
+    const processedItems = limitedItems.map(item => {
+      const title = item.title;
+      const usernameRegex = /@([a-zA-Z]+)(?:\s|$)/g;
+      const usernames: string[] = [];
+
+      // Extract usernames
+      let match;
+      while ((match = usernameRegex.exec(title)) !== null) {
+        usernames.push(match[1]);
+      }
+
+      // Return the item with usernames
+      return {
+        ...item,
+        usernames
+      };
+    });
+
     // Then group them by date
-    const groupedSchedule = limitedItems.reduce((acc: { [key: string]: TwitchStreamScheduleSegment[] }, item) => {
+    const groupedSchedule = processedItems.reduce((acc: { [key: string]: TwitchStreamScheduleSegment[] }, item) => {
       const date = new Date(item.start_time).toISOString().split('T')[0];
       if (!acc[date]) {
         acc[date] = [];

@@ -18,6 +18,17 @@
       </div>
     </div>
     <div class="flex flex-col gap-y-[16px]">
+      <div class="flex flex-col gap-y-[8px]">
+        <CustomLabel id="panelTitle">
+          {{ t('config.general.panelTitle') }}
+        </CustomLabel>
+        <input
+          type="text"
+          id="panelTitle"
+          :placeholder="t('config.general.panelTitlePlaceholder')"
+          :value="panelTitle"
+          @input="emits('update:panelTitle', ($event.target as HTMLInputElement).value.trim())" />
+      </div>
       <div class="flex flex-row gap-x-[8px]">
         <input
           type="checkbox"
@@ -48,16 +59,15 @@
           {{ t('config.general.showStreamTimes') }}
         </CustomLabel>
       </div>
-      <div class="flex flex-col gap-y-[8px]">
-        <CustomLabel id="panelTitle">
-          {{ t('config.general.panelTitle') }}
-        </CustomLabel>
+      <div class="flex flex-row gap-x-[8px]">
         <input
-          type="text"
-          id="panelTitle"
-          :placeholder="t('config.general.panelTitlePlaceholder')"
-          :value="panelTitle"
-          @input="emits('update:panelTitle', ($event.target as HTMLInputElement).value.trim())" />
+          type="checkbox"
+          id="showUsernames"
+          :checked="showUsernames"
+          @change="emits('update:showUsernames', ($event.target as HTMLInputElement).checked)" />
+        <CustomLabel id="showUsernames">
+          {{ t('config.general.showStreamUsernames') }}
+        </CustomLabel>
       </div>
     </div>
   </div>
@@ -75,6 +85,7 @@ defineProps<{
   showCategory: boolean
   showTimes: boolean
   showTitle: boolean
+  showUsernames: boolean
 }>()
 
 const emits = defineEmits<{
@@ -83,5 +94,6 @@ const emits = defineEmits<{
   (e: 'update:showCategory', value: boolean): void
   (e: 'update:showTimes', value: boolean): void
   (e: 'update:showTitle', value: boolean): void
+  (e: 'update:showUsernames', value: boolean): void
 }>()
 </script>
