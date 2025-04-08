@@ -16,6 +16,7 @@
       :show-category="config.showCategory"
       :show-times="config.showTimes"
       :show-title="config.showTitle"
+      :show-usernames="config.showUsernames"
       :time-font-color="config.timeFontColor" />
   </template>
   <template v-if="twitchLoading">
