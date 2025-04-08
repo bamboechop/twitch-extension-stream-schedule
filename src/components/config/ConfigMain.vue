@@ -102,6 +102,7 @@ defineProps<{
   showSuccessMessage: boolean
   showTimes: boolean
   showTitle: boolean
+  showUsernames: boolean
   theme: string
   timeFontColor: string
 }>()
@@ -122,6 +123,7 @@ const emits = defineEmits<{
   (e: 'update:show-category', value: boolean): void
   (e: 'update:show-times', value: boolean): void
   (e: 'update:show-title', value: boolean): void
+  (e: 'update:show-usernames', value: boolean): void
   (e: 'update:theme', value: string): void
   (e: 'update:time-font-color', value: string): void
 }>()
