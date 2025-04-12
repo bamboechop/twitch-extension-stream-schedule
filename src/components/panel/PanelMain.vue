@@ -4,6 +4,26 @@
     class="relative font-(--extension-font-family) overflow-auto flex flex-col gap-y-4 max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen mx-auto w-full bg-(--extension-color-background) text-(--extension-color-text)">
     <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || t('schedule.title') }}</h1>
     <div class="flex flex-col gap-y-4 h-full p-3 pt-0 mb-16">
+      <template v-if="vacation">
+        <div class="flex flex-col gap-y-2 p-4 pt-3 rounded-md border"
+          :style="{
+            backgroundColor: `${vacationBackgroundColor}1A`,
+            borderColor: `${vacationBackgroundColor}33`
+          }">
+          <div class="flex items-center gap-2">
+            <h2 class="text-lg font-bold" :style="{ color: vacationFontColor }">{{ t('schedule.onVacation') }}</h2>
+          </div>
+          <div class="flex flex-col gap-1">
+            <p class="text-sm" :style="{ color: vacationFontColor, opacity: 0.9 }">
+              {{ t('schedule.vacationMessage', {
+                streamerName: broadcasterName,
+                start: formatDate(vacation.start_time),
+                end: formatDate(vacation.end_time, { day: '2-digit', month: '2-digit', year: 'numeric' }),
+              }) }}
+            </p>
+          </div>
+        </div>
+      </template>
       <template v-if="scheduleItems.length > 0">
         <template v-for="group in scheduleItems" :key="group.date">
           <div class="flex flex-col">
@@ -79,7 +99,7 @@ import { computed, watch } from 'vue'
 import { useUrlSearchParams } from '@vueuse/core';
 import { useI18n } from 'vue-i18n'
 import { AlarmClock, Tag, User } from 'lucide-vue-next'
-import type { GroupedScheduleItem, TwitchUrlSearchParams } from '@/common/interfaces/twitch.interface'
+import type { GroupedScheduleItem, TwitchUrlSearchParams, TwitchStreamScheduleResponse } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
 
@@ -100,6 +120,9 @@ const {
   showUsernames,
   tag = 'main',
   timeFontColor,
+  vacation,
+  vacationBackgroundColor,
+  vacationFontColor,
 } = defineProps<{
   backgroundColor: string
   broadcasterName: string
@@ -119,15 +142,20 @@ const {
   showUsernames: boolean
   tag?: string
   timeFontColor: string
+  vacation: TwitchStreamScheduleResponse['data']['vacation']
+  vacationBackgroundColor: string
+  vacationFontColor: string
 }>()
 
 const urlParams = useUrlSearchParams<TwitchUrlSearchParams>('history');
 
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString(urlParams.locale, {
+const formatDate = (dateString: string, options: Intl.DateTimeFormatOptions = {}) => {
+  const defaultOptions: Intl.DateTimeFormatOptions = {
     day: 'numeric',
     month: 'numeric',
-  });
+    ...options
+  };
+  return new Date(dateString).toLocaleDateString(urlParams.locale, defaultOptions);
 }
 
 const formatDay = (dateString: string) => {

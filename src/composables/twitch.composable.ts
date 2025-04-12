@@ -27,6 +27,7 @@ const config = ref<TwitchExtensionConfiguration>({
   theme: 'default',
 });
 const darkMode = ref<boolean>(false);
+const vacation = ref<TwitchStreamScheduleResponse['data']['vacation']>(null);
 
 export const useTwitch = () => {
   const schedule = ref<GroupedScheduleItem[]>([]);
@@ -115,6 +116,7 @@ export const useTwitch = () => {
             // 404 means no schedule exists, we should handle this as a valid response
             allScheduleItems.value = [];
             schedule.value = [];
+            vacation.value = null;
             return;
           case 429:
             throw new Error('Rate limit exceeded. Please try again later.');
@@ -125,11 +127,13 @@ export const useTwitch = () => {
 
       const data: TwitchStreamScheduleResponse = await response.json();
       allScheduleItems.value = data.data.segments;
+      vacation.value = data.data.vacation;
       schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];
       schedule.value = [];
+      vacation.value = null;
     }
   }
 
@@ -165,6 +169,8 @@ export const useTwitch = () => {
       scheduleButtonBackgroundColor: expandShortHex(themeConfig.scheduleButtonBackgroundColor),
       scheduleButtonFontColor: expandShortHex(themeConfig.scheduleButtonFontColor),
       timeFontColor: expandShortHex(themeConfig.timeFontColor),
+      vacationBackgroundColor: expandShortHex(themeConfig.vacationBackgroundColor),
+      vacationFontColor: expandShortHex(themeConfig.vacationFontColor),
     }
   }
 
@@ -203,15 +209,33 @@ export const useTwitch = () => {
     if (twitchConfig?.content) {
       try {
         const parsedConfig = JSON.parse(twitchConfig.content) as TwitchExtensionConfiguration;
-        // Expand any short hex codes in the stored configuration
-        const expandedConfig = {
-          ...parsedConfig,
-          ...(parsedConfig.theme !== 'custom' ? expandThemeColors(parsedConfig) : {}),
-        };
 
+        // Start with the current config which includes defaults
+        const newConfig = { ...config.value };
+
+        // If using a predefined theme, apply its colors
+        if (parsedConfig.theme !== 'custom') {
+          Object.assign(newConfig, expandThemeColors(themes[parsedConfig.theme]));
+        }
+
+        // Only then overlay the saved configuration, preserving any new default values
+        // that weren't in the saved config
         config.value = {
-          ...config.value,
-          ...expandedConfig,
+          ...newConfig,
+          ...parsedConfig,
+          // For color values, only take them from parsedConfig if we're using a custom theme
+          ...(parsedConfig.theme === 'custom' ? {
+            backgroundColor: parsedConfig.backgroundColor,
+            dayBorderColor: parsedConfig.dayBorderColor,
+            fontColor: parsedConfig.fontColor,
+            headerBackgroundColor: parsedConfig.headerBackgroundColor,
+            headerFontColor: parsedConfig.headerFontColor,
+            scheduleButtonBackgroundColor: parsedConfig.scheduleButtonBackgroundColor,
+            scheduleButtonFontColor: parsedConfig.scheduleButtonFontColor,
+            timeFontColor: parsedConfig.timeFontColor,
+            vacationBackgroundColor: parsedConfig.vacationBackgroundColor,
+            vacationFontColor: parsedConfig.vacationFontColor,
+          } : {}),
         };
       } catch (error) {
         console.error('Error parsing config:', error);
@@ -246,6 +270,7 @@ export const useTwitch = () => {
     config,
     schedule,
     twitchLoading,
+    vacation,
     saveConfig,
     updateTheme,
   };

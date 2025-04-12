@@ -33,6 +33,8 @@
                 :schedule-button-font-color="scheduleButtonFontColor"
                 :theme="theme"
                 :time-font-color="timeFontColor"
+                :vacation-background-color="vacationBackgroundColor"
+                :vacation-font-color="vacationFontColor"
                 @update:background-color="emits('update:background-color', $event)"
                 @update:day-border-color="emits('update:day-border-color', $event)"
                 @update:font-color="emits('update:font-color', $event)"
@@ -41,7 +43,9 @@
                 @update:schedule-button-background-color="emits('update:schedule-button-background-color', $event)"
                 @update:schedule-button-font-color="emits('update:schedule-button-font-color', $event)"
                 @update:theme="emits('update:theme', $event)"
-                @update:time-font-color="emits('update:time-font-color', $event)" />
+                @update:time-font-color="emits('update:time-font-color', $event)"
+                @update:vacation-background-color="emits('update:vacation-background-color', $event)"
+                @update:vacation-font-color="emits('update:vacation-font-color', $event)" />
             </template>
             <template v-if="selectedView === 'typography'">
               <ConfigTypography
@@ -76,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Check, Save } from 'lucide-vue-next'
 import ConfigPanelSelection from './ConfigPanelSelection.vue'
@@ -105,6 +109,8 @@ defineProps<{
   showUsernames: boolean
   theme: string
   timeFontColor: string
+  vacationBackgroundColor: string
+  vacationFontColor: string
 }>()
 
 const emits = defineEmits<{
@@ -120,15 +126,23 @@ const emits = defineEmits<{
   (e: 'update:panel-title', value: string): void
   (e: 'update:schedule-button-background-color', value: string): void
   (e: 'update:schedule-button-font-color', value: string): void
+  (e: 'update:selected-view', value: 'general' | 'appearance' | 'typography'): void
   (e: 'update:show-category', value: boolean): void
   (e: 'update:show-times', value: boolean): void
   (e: 'update:show-title', value: boolean): void
   (e: 'update:show-usernames', value: boolean): void
   (e: 'update:theme', value: string): void
   (e: 'update:time-font-color', value: string): void
+  (e: 'update:vacation-background-color', value: string): void
+  (e: 'update:vacation-font-color', value: string): void
 }>()
 
 const selectedView = ref<'general' | 'appearance' | 'typography'>('general')
+
+// Watch for changes in selectedView and emit them
+watch(selectedView, (newValue) => {
+  emits('update:selected-view', newValue);
+});
 
 const saveConfig = () => {
   emits('save-config')

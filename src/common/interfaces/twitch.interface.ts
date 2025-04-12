@@ -72,6 +72,8 @@ export interface TwitchExtensionThemeConfiguration {
   scheduleButtonBackgroundColor: string;
   scheduleButtonFontColor: string;
   timeFontColor: string;
+  vacationBackgroundColor: string;
+  vacationFontColor: string;
 }
 
 export interface TwitchExtensionConfiguration extends TwitchExtensionThemeConfiguration {

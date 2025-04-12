@@ -1,14 +1,39 @@
 {
   "common": {
-    "cancel": "Abbrechen",
-    "delete": "Löschen",
-    "edit": "Bearbeiten",
-    "loading": "Lädt...",
     "save": "Speichern",
-    "saved": "Gespeichert"
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "saved": "Gespeichert",
+    "loading": "Lädt..."
+  },
+  "schedule": {
+    "title": "Stream-Zeitplan",
+    "addStream": "Stream hinzufügen",
+    "noStreams": "Keine Streams geplant",
+    "viewFullSchedule": "Vollständigen Zeitplan anzeigen",
+    "timesInLocalTimezone": "Zeiten werden in deiner lokalen Zeitzone angezeigt",
+    "addStreamsToSchedule": "Um zu sehen, wie die Streams aussehen werden, musst du einige Streams zu deinem Zeitplan hinzufügen.",
+    "goToSchedule": "Zum Zeitplan",
+    "onVacation": "Zeit für eine Pause! 🌴",
+    "vacationMessage": "{streamerName} ist von {start} bis {end} im wohlverdienten Urlaub.",
+    "previewVacationInfo": "Die Urlaubsbenachrichtigung wird angezeigt, um bei der Farbauswahl zu unterstützen. Wird außerhalb der Vorschau nicht angezeigt."
   },
   "config": {
+    "customizeSchedule": "Passe an, wie dein Stream-Zeitplan aussehen soll",
+    "previewSchedule": "Sieh dir an, wie dein Stream-Zeitplan aussehen wird",
+    "general": {
+      "title": "Allgemein",
+      "numberOfItems": "Anzahl der Zeitplan-Einträge (1-5)",
+      "showStreamTitle": "Stream-Titel anzeigen",
+      "showStreamCategory": "Stream-Kategorie anzeigen",
+      "showStreamTimes": "Stream-Zeiten anzeigen",
+      "showStreamUsernames": "Namen der Personen anzeigen, mit denen du während eines Streams spielst",
+      "panelTitle": "Panel-Titel",
+      "panelTitlePlaceholder": "Streamplan"
+    },
     "appearance": {
+      "title": "Erscheinungsbild",
       "theme": "Design",
       "backgroundColor": "Hintergrundfarbe",
       "dayBorderColor": "Tagesrandfarbe",
@@ -18,44 +43,24 @@
       "scheduleButtonBackgroundColor": "Zeitplan-Button-Hintergrundfarbe",
       "scheduleButtonFontColor": "Zeitplan-Button-Schriftfarbe",
       "timeFontColor": "Zeit-Schriftfarbe",
+      "vacationBackgroundColor": "Urlaubsbenachrichtigung-Hintergrundfarbe",
+      "vacationFontColor": "Urlaubsbenachrichtigung-Schriftfarbe",
       "themes": {
-        "crystalClear": "Crystal Clear",
-        "custom": "Benutzerdefiniert",
         "default": "Default",
-        "enchantedForest": "Enchanted Forest",
-        "mintChocolate": "Mint Chocolate",
         "neonNights": "Neon Nights",
-        "retroWave": "RetroWave",
+        "mintChocolate": "Mint Chocolate",
+        "sunsetVibes": "Sunset Vibes",
         "royalPurple": "Royal Purple",
-        "sunsetVibes": "Sunset Vibes"
-      },
-      "title": "Erscheinungsbild"
+        "enchantedForest": "Enchanted Forest",
+        "retroWave": "RetroWave",
+        "crystalClear": "Crystal Clear",
+        "custom": "Benutzerdefiniert"
+      }
     },
-    "customizeSchedule": "Passe an, wie dein Stream-Zeitplan aussehen soll",
-    "general": {
-      "numberOfItems": "Anzahl der Zeitplan-Einträge (1-5)",
-      "panelTitle": "Panel-Titel",
-      "panelTitlePlaceholder": "Streamplan",
-      "showStreamCategory": "Stream-Kategorie anzeigen",
-      "showStreamTimes": "Stream-Zeiten anzeigen",
-      "showStreamTitle": "Stream-Titel anzeigen",
-      "showStreamUsernames": "Namen der Personen anzeigen, mit denen du während eines Streams spielst",
-      "title": "Allgemein"
-    },
-    "previewSchedule": "Sieh dir an, wie dein Stream-Zeitplan aussehen wird",
     "typography": {
+      "title": "Typografie",
       "fontFamily": "Schriftart",
-      "fontSize": "Schriftgröße (12px - 18px)",
-      "title": "Typografie"
+      "fontSize": "Schriftgröße (12px - 18px)"
     }
-  },
-  "schedule": {
-    "addStream": "Stream hinzufügen",
-    "addStreamsToSchedule": "Um zu sehen, wie die Streams aussehen werden, musst du einige Streams zu deinem Zeitplan hinzufügen.",
-    "goToSchedule": "Zum Zeitplan",
-    "noStreams": "Keine Streams geplant",
-    "timesInLocalTimezone": "Zeiten werden in deiner lokalen Zeitzone angezeigt",
-    "title": "Stream-Zeitplan",
-    "viewFullSchedule": "Vollständigen Zeitplan anzeigen"
   }
 }

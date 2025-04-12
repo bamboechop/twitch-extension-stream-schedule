@@ -14,7 +14,10 @@
     "viewFullSchedule": "View full schedule",
     "timesInLocalTimezone": "Times shown are in your local timezone",
     "addStreamsToSchedule": "To see how the streams will look like, you need to add some streams to your schedule.",
-    "goToSchedule": "Go to schedule"
+    "goToSchedule": "Go to schedule",
+    "onVacation": "Time for a break! 🌴",
+    "vacationMessage": "{streamerName} is taking a well deserved vacation from {start} to {end}.",
+    "previewVacationInfo": "Showing vacation notice to help with color selection. It won't be visible outside of the preview."
   },
   "config": {
     "customizeSchedule": "Customize how your stream schedule looks like",
@@ -40,6 +43,8 @@
       "scheduleButtonBackgroundColor": "Schedule button background color",
       "scheduleButtonFontColor": "Schedule button font color",
       "timeFontColor": "Time font color",
+      "vacationBackgroundColor": "Vacation notice background color",
+      "vacationFontColor": "Vacation notice font color",
       "themes": {
         "default": "Default",
         "neonNights": "Neon Nights",

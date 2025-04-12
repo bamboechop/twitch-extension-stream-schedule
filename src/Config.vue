@@ -19,6 +19,8 @@
       :show-usernames="config.showUsernames"
       :time-font-color="config.timeFontColor"
       :theme="config.theme"
+      :vacation-background-color="config.vacationBackgroundColor"
+      :vacation-font-color="config.vacationFontColor"
       @save-config="save"
       @update:amount-of-schedule-items="config.amountOfScheduleItems = $event"
       @update:background-color="config.backgroundColor = $event"
@@ -31,12 +33,15 @@
       @update:panel-title="config.panelTitle = $event"
       @update:schedule-button-background-color="config.scheduleButtonBackgroundColor = $event"
       @update:schedule-button-font-color="config.scheduleButtonFontColor = $event"
+      @update:selected-view="selectedView = $event"
       @update:show-category="config.showCategory = $event"
       @update:show-times="config.showTimes = $event"
       @update:show-title="config.showTitle = $event"
       @update:show-usernames="config.showUsernames = $event"
       @update:theme="handleThemeChange"
-      @update:time-font-color="config.timeFontColor = $event" />
+      @update:time-font-color="config.timeFontColor = $event"
+      @update:vacation-background-color="config.vacationBackgroundColor = $event"
+      @update:vacation-font-color="config.vacationFontColor = $event" />
     <ConfigPreview
       :background-color="config.backgroundColor"
       :day-border-color="config.dayBorderColor"
@@ -48,12 +53,15 @@
       :panel-title="config.panelTitle"
       :schedule-button-background-color="config.scheduleButtonBackgroundColor"
       :schedule-button-font-color="config.scheduleButtonFontColor"
+      :selected-view="selectedView"
       :show-category="config.showCategory"
       :show-times="config.showTimes"
       :show-title="config.showTitle"
       :show-usernames="config.showUsernames"
       :theme="config.theme"
-      :time-font-color="config.timeFontColor" />
+      :time-font-color="config.timeFontColor"
+      :vacation-background-color="config.vacationBackgroundColor"
+      :vacation-font-color="config.vacationFontColor" />
   </section>
 </template>
 
@@ -65,8 +73,8 @@ import ConfigPreview from './components/config/ConfigPreview.vue'
 import type { TwitchExtensionTheme } from './common/interfaces/twitch.interface'
 
 const { config, saveConfig, updateTheme } = useTwitch()
-
 const showSuccessMessage = ref(false)
+const selectedView = ref<'general' | 'appearance' | 'typography'>('general')
 
 const handleThemeChange = (theme: TwitchExtensionTheme) => {
   updateTheme(theme)

@@ -62,6 +62,8 @@ const props = defineProps<{
   scheduleButtonFontColor: string
   theme: string
   timeFontColor: string
+  vacationBackgroundColor: string
+  vacationFontColor: string
 }>()
 
 const emits = defineEmits<{
@@ -78,6 +80,8 @@ const colorConfigs = [
   { id: 'scheduleButtonFontColor', label: 'Schedule button font color' },
   { id: 'timeFontColor', label: 'Time font color' },
   { id: 'dayBorderColor', label: 'Day border color' },
+  { id: 'vacationBackgroundColor', label: 'Vacation notice background color' },
+  { id: 'vacationFontColor', label: 'Vacation notice font color' },
 ] as const
 
 // Keep track of expanded color values for the color pickers
@@ -90,6 +94,8 @@ const colorValues = ref({
   scheduleButtonBackgroundColor: props.scheduleButtonBackgroundColor,
   scheduleButtonFontColor: props.scheduleButtonFontColor,
   timeFontColor: props.timeFontColor,
+  vacationBackgroundColor: props.vacationBackgroundColor,
+  vacationFontColor: props.vacationFontColor,
 })
 
 // Watch for prop changes and update colorValues

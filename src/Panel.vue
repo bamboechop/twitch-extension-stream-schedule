@@ -17,7 +17,10 @@
       :show-times="config.showTimes"
       :show-title="config.showTitle"
       :show-usernames="config.showUsernames"
-      :time-font-color="config.timeFontColor" />
+      :time-font-color="config.timeFontColor"
+      :vacation="vacation"
+      :vacation-background-color="config.vacationBackgroundColor"
+      :vacation-font-color="config.vacationFontColor" />
   </template>
   <template v-if="twitchLoading">
     <div class="flex justify-center items-center h-full">
@@ -30,5 +33,5 @@
 import PanelMain from './components/panel/PanelMain.vue'
 import { useTwitch } from './composables/twitch.composable';
 
-const { broadcasterName, config, schedule, twitchLoading } = useTwitch();
+const { broadcasterName, config, schedule, twitchLoading, vacation } = useTwitch();
 </script>
