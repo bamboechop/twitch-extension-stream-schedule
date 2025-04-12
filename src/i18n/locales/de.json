@@ -25,10 +25,11 @@
     "general": {
       "title": "Allgemein",
       "numberOfItems": "Anzahl der Zeitplan-Einträge (1-5)",
+      "showHeader": "Panel-Titel anzeigen",
       "showStreamTitle": "Stream-Titel anzeigen",
       "showStreamCategory": "Stream-Kategorie anzeigen",
       "showStreamTimes": "Stream-Zeiten anzeigen",
-      "showStreamUsernames": "Namen der Personen anzeigen, mit denen du während eines Streams spielst",
+      "showStreamUsernames": "Nutzernamen der Mitspieler anzeigen",
       "panelTitle": "Panel-Titel",
       "panelTitlePlaceholder": "Streamplan"
     },

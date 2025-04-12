@@ -2,8 +2,12 @@
   <component
     :is="tag"
     class="relative font-(--extension-font-family) overflow-auto flex flex-col gap-y-4 max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen mx-auto w-full bg-(--extension-color-background) text-(--extension-color-text)">
-    <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || t('schedule.title') }}</h1>
-    <div class="flex flex-col gap-y-4 h-full p-3 pt-0 mb-16">
+    <template v-if="showHeader">
+      <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || t('schedule.title') }}</h1>
+    </template>
+    <div
+      class="flex flex-col gap-y-4 h-full p-3 mb-16"
+      :class="{ 'pt-0': showHeader }">
       <template v-if="vacation">
         <div class="flex flex-col gap-y-2 p-4 pt-3 rounded-md border"
           :style="{
@@ -137,6 +141,7 @@ const {
   scheduleButtonFontColor: string
   scheduleItems: GroupedScheduleItem[]
   showCategory: boolean
+  showHeader: boolean
   showTimes: boolean
   showTitle: boolean
   showUsernames: boolean

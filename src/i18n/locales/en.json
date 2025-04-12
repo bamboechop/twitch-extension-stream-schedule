@@ -25,6 +25,7 @@
     "general": {
       "title": "General",
       "numberOfItems": "Number of schedule items (1-5)",
+      "showHeader": "Show panel title",
       "showStreamTitle": "Show stream title",
       "showStreamCategory": "Show stream category",
       "showStreamTimes": "Show stream times",

@@ -12,12 +12,14 @@
                 :amount-of-schedule-items="amountOfScheduleItems"
                 :panel-title="panelTitle"
                 :show-category="showCategory"
+                :show-header="showHeader"
                 :show-times="showTimes"
                 :show-title="showTitle"
                 :show-usernames="showUsernames"
                 @update:amount-of-schedule-items="emits('update:amount-of-schedule-items', $event)"
                 @update:panel-title="emits('update:panel-title', $event)"
                 @update:show-category="emits('update:show-category', $event)"
+                @update:show-header="emits('update:show-header', $event)"
                 @update:show-times="emits('update:show-times', $event)"
                 @update:show-title="emits('update:show-title', $event)"
                 @update:show-usernames="emits('update:show-usernames', $event)" />
@@ -103,6 +105,7 @@ defineProps<{
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean
+  showHeader: boolean
   showSuccessMessage: boolean
   showTimes: boolean
   showTitle: boolean
@@ -128,6 +131,7 @@ const emits = defineEmits<{
   (e: 'update:schedule-button-font-color', value: string): void
   (e: 'update:selected-view', value: 'general' | 'appearance' | 'typography'): void
   (e: 'update:show-category', value: boolean): void
+  (e: 'update:show-header', value: boolean): void
   (e: 'update:show-times', value: boolean): void
   (e: 'update:show-title', value: boolean): void
   (e: 'update:show-usernames', value: boolean): void

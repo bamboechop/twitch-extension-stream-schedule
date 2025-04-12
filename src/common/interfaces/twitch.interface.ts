@@ -82,6 +82,7 @@ export interface TwitchExtensionConfiguration extends TwitchExtensionThemeConfig
   fontSize: number;
   panelTitle: string;
   showCategory: boolean;
+  showHeader: boolean;
   showTimes: boolean;
   showTitle: boolean;
   showUsernames: boolean;

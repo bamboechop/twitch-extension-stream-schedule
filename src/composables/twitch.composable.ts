@@ -21,6 +21,7 @@ const config = ref<TwitchExtensionConfiguration>({
   fontSize: 16,
   panelTitle: '',
   showCategory: true,
+  showHeader: true,
   showTimes: true,
   showTitle: true,
   showUsernames: true,

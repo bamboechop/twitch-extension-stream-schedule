@@ -14,6 +14,7 @@
       :schedule-button-font-color="config.scheduleButtonFontColor"
       :schedule-items="schedule"
       :show-category="config.showCategory"
+      :show-header="config.showHeader"
       :show-times="config.showTimes"
       :show-title="config.showTitle"
       :show-usernames="config.showUsernames"

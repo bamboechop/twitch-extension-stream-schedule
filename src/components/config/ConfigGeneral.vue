@@ -33,6 +33,16 @@
       <div class="flex flex-row gap-x-[8px]">
         <input
           type="checkbox"
+          id="showHeader"
+          :checked="showHeader"
+          @change="emits('update:showHeader', ($event.target as HTMLInputElement).checked)" />
+        <CustomLabel id="showHeader">
+          {{ t('config.general.showHeader') }}
+        </CustomLabel>
+      </div>
+      <div class="flex flex-row gap-x-[8px]">
+        <input
+          type="checkbox"
           id="showTitle"
           :checked="showTitle"
           @change="emits('update:showTitle', ($event.target as HTMLInputElement).checked)" />
@@ -84,6 +94,7 @@ defineProps<{
   amountOfScheduleItems: number
   panelTitle: string
   showCategory: boolean
+  showHeader: boolean
   showTimes: boolean
   showTitle: boolean
   showUsernames: boolean
@@ -93,6 +104,7 @@ const emits = defineEmits<{
   (e: 'update:amountOfScheduleItems', value: number): void
   (e: 'update:panelTitle', value: string): void
   (e: 'update:showCategory', value: boolean): void
+  (e: 'update:showHeader', value: boolean): void
   (e: 'update:showTimes', value: boolean): void
   (e: 'update:showTitle', value: boolean): void
   (e: 'update:showUsernames', value: boolean): void
