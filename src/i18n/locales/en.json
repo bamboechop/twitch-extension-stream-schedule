@@ -34,7 +34,7 @@
     },
     "appearance": {
       "title": "Appearance",
-      "theme": "Theme",
+      "theme": "Design",
       "backgroundColor": "Background color",
       "dayBorderColor": "Day border color",
       "fontColor": "Font color",
@@ -46,6 +46,10 @@
       "vacationBackgroundColor": "Vacation notice background color",
       "vacationFontColor": "Vacation notice font color",
       "themes": {
+        "themeGroups": {
+          "light": "Light Themes",
+          "dark": "Dark Themes"
+        },
         "default": "Default",
         "neonNights": "Neon Nights",
         "mintChocolate": "Mint Chocolate",

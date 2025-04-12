@@ -9,9 +9,19 @@
         :value="theme"
         @change="emits('update:theme', ($event.target as HTMLSelectElement).value)"
         class="w-full text-[16px] bg-neutral-800 text-gray-100 border border-neutral-600 rounded-sm px-[12px] py-[8px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-        <option v-for="(label, value) in themes" :key="value" :value="value" class="bg-neutral-800 text-gray-100">
-          {{ t(`config.appearance.themes.${value}`) }}
+        <option v-for="theme in groupedThemes.default" :key="theme" :value="theme" class="bg-neutral-800 text-gray-100">
+          {{ t(`config.appearance.themes.${theme}`) }}
         </option>
+        <optgroup :label="t('config.appearance.themes.themeGroups.dark')" class="bg-neutral-800 text-gray-100">
+          <option v-for="theme in groupedThemes.dark" :key="theme" :value="theme" class="bg-neutral-800 text-gray-100">
+            {{ t(`config.appearance.themes.${theme}`) }}
+          </option>
+        </optgroup>
+        <optgroup :label="t('config.appearance.themes.themeGroups.light')" class="bg-neutral-800 text-gray-100">
+          <option v-for="theme in groupedThemes.light" :key="theme" :value="theme" class="bg-neutral-800 text-gray-100">
+            {{ t(`config.appearance.themes.${theme}`) }}
+          </option>
+        </optgroup>
         <option v-if="theme === 'custom'" value="custom" class="bg-neutral-800 text-gray-100">
           {{ t('config.appearance.themes.custom') }}
         </option>
@@ -45,12 +55,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CustomLabel from '../common/CustomLabel.vue'
-import { themes } from '@/common/themes';
+import { themes } from '@/common/themes'
 
 const { t } = useI18n({ useScope: 'global' })
+
+// Define which themes belong to which group
+const groupedThemes = computed(() => {
+  const lightThemes = ['crystalClear', 'sakuraSpring', 'oceanBreeze', 'goldenHour', 'lavenderFields'];
+  const darkThemes = ['neonNights', 'mintChocolate', 'sunsetVibes', 'royalPurple', 'enchantedForest', 'retroWave', 'deepSpace'];
+
+  return {
+    default: ['default'],
+    dark: Object.keys(themes).filter(theme => darkThemes.includes(theme)),
+    light: Object.keys(themes).filter(theme => lightThemes.includes(theme))
+  };
+});
 
 const props = defineProps<{
   backgroundColor: string

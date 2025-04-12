@@ -46,7 +46,11 @@
       "vacationBackgroundColor": "Urlaubsbenachrichtigung-Hintergrundfarbe",
       "vacationFontColor": "Urlaubsbenachrichtigung-Schriftfarbe",
       "themes": {
-        "default": "Default",
+        "themeGroups": {
+          "light": "Helle Designs",
+          "dark": "Dunkle Designs"
+        },
+        "default": "Standard",
         "neonNights": "Neon Nights",
         "mintChocolate": "Mint Chocolate",
         "sunsetVibes": "Sunset Vibes",
