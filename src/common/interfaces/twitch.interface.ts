@@ -61,7 +61,7 @@ export interface TwitchExtensionContextResponse {
   theme: 'light' | 'dark';
 }
 
-export type TwitchExtensionTheme = 'default' | 'neonNights' | 'mintChocolate' | 'sunsetVibes' | 'royalPurple' | 'enchantedForest' | 'retroWave' | 'crystalClear' | 'custom';
+export type TwitchExtensionTheme = 'default' | 'neonNights' | 'mintChocolate' | 'sunsetVibes' | 'royalPurple' | 'enchantedForest' | 'retroWave' | 'crystalClear' | 'sakuraSpring' | 'oceanBreeze' | 'deepSpace' | 'goldenHour' | 'lavenderFields' | 'custom';
 
 export interface TwitchExtensionThemeConfiguration {
   backgroundColor: string;
