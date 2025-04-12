@@ -27,14 +27,14 @@
         </option>
       </select>
     </div>
-    <div class="flex flex-col gap-y-[8px]">
+    <div class="grid sm:grid-cols-2 gap-[16px]">
       <div v-for="config in colorConfigs" :key="config.id" class="flex flex-col gap-y-[8px]">
         <CustomLabel :id="config.id">
           {{ t(`config.appearance.${config.id}`) }}
         </CustomLabel>
         <div class="flex items-center gap-x-[8px]">
           <input
-            class="w-[78px] h-[36px] text-[14px] border-neutral-600"
+            class="w-[48px] h-[36px] text-[14px] border-neutral-600"
             type="color"
             :id="config.id"
             :value="colorValues[config.id]"
@@ -49,7 +49,7 @@
             @blur="handleBlur($event, config.id)"
           />
         </div>
-     </div>
+      </div>
     </div>
   </div>
 </template>
@@ -93,15 +93,21 @@ const emits = defineEmits<{
   (e: `update:${keyof typeof colorValues.value}`, value: string): void
 }>()
 
+// order matters for the appearance in the grid
 const colorConfigs = [
+  // Main colors
   { id: 'backgroundColor', label: 'Background color' },
-  { id: 'headerBackgroundColor', label: 'Header background color' },
   { id: 'fontColor', label: 'Font color' },
+  // Header colors
+  { id: 'headerBackgroundColor', label: 'Header background color' },
   { id: 'headerFontColor', label: 'Header font color' },
+  // Button colors
   { id: 'scheduleButtonBackgroundColor', label: 'Schedule button background color' },
   { id: 'scheduleButtonFontColor', label: 'Schedule button font color' },
-  { id: 'timeFontColor', label: 'Time font color' },
+  // Schedule colors
   { id: 'dayBorderColor', label: 'Day border color' },
+  { id: 'timeFontColor', label: 'Time font color' },
+  // Vacation notice colors
   { id: 'vacationBackgroundColor', label: 'Vacation notice background color' },
   { id: 'vacationFontColor', label: 'Vacation notice font color' },
 ] as const
