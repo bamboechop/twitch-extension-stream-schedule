@@ -1,0 +1,81 @@
+name: Bug Report
+description: Create a report to help us improve
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        
+        Before submitting, please check if a similar issue already exists.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us what you expected to happen
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Microsoft Edge
+        - Other
+
+  - type: input
+    id: twitch-channel
+    attributes:
+      label: Twitch Channel
+      description: On which Twitch channel did this occur? (if applicable)
+      placeholder: ex. your_channel_name
+
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Which theme were you using?
+      options:
+        - Default
+        - Neon Nights
+        - Mint Chocolate
+        - Sunset Vibes
+        - Royal Purple
+        - Enchanted Forest
+        - Retro Wave
+        - Crystal Clear
+        - Sakura Spring
+        - Ocean Breeze
+        - Deep Space
+        - Golden Hour
+        - Lavender Fields
+        - Custom Theme
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant console log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code.
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem
+      placeholder: Drag and drop images here
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](../CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true 
