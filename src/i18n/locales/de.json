@@ -17,7 +17,7 @@
     "goToSchedule": "Zum Zeitplan",
     "onVacation": "Zeit für eine Pause! 🌴",
     "vacationMessage": "{streamerName} ist von {start} bis {end} im wohlverdienten Urlaub.",
-    "previewVacationInfo": "Die Urlaubsbenachrichtigung wird angezeigt, um bei der Farbauswahl zu unterstützen. Wird außerhalb der Vorschau nicht angezeigt."
+    "previewVacationInfo": "Die Urlaubsbenachrichtigung wird angezeigt, um bei der Farbauswahl zu unterstützen. Wird außerhalb der Vorschau nur angezeigt, wenn der Urlaubsmodus aktiviert ist."
   },
   "config": {
     "customizeSchedule": "Passe an, wie dein Stream-Zeitplan aussehen soll",
@@ -31,7 +31,7 @@
       "showStreamTimes": "Stream-Zeiten anzeigen",
       "showStreamUsernames": "Nutzernamen der Mitspieler anzeigen",
       "panelTitle": "Panel-Titel",
-      "panelTitlePlaceholder": "Streamplan"
+      "panelTitlePlaceholder": "Stream-Zeitplan"
     },
     "appearance": {
       "title": "Erscheinungsbild",

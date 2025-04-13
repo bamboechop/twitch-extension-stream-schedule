@@ -17,7 +17,7 @@
     "goToSchedule": "Go to schedule",
     "onVacation": "Time for a break! 🌴",
     "vacationMessage": "{streamerName} is taking a well deserved vacation from {start} to {end}.",
-    "previewVacationInfo": "Showing vacation notice to help with color selection. It won't be visible outside of the preview."
+    "previewVacationInfo": "Showing vacation notice to help with color selection. It won't be visible outside of the preview, unless the vacation mode is disabled."
   },
   "config": {
     "customizeSchedule": "Customize how your stream schedule looks like",
