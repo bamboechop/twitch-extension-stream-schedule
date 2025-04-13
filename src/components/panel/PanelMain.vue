@@ -6,7 +6,7 @@
       <h1 class="bg-(--extension-color-header-background) text-2xl font-bold p-3 text-(--extension-color-header-font-color)">{{ panelTitle || t('schedule.title') }}</h1>
     </template>
     <div
-      class="flex flex-col gap-y-4 h-full p-3 mb-16"
+      class="flex flex-col gap-y-4 p-3 h-[calc(100vh-68px)]"
       :class="{ 'pt-0': showHeader }">
       <template v-if="vacation">
         <div class="flex flex-col gap-y-2 p-4 pt-3 rounded-md border"
@@ -63,7 +63,7 @@
                   </div>
                   <template v-if="showTimes">
                     <div class="text-xs italic text-(--extension-color-time-font-color) flex items-stat gap-x-1 justify-end text-right">
-                      <AlarmClock class="mt-[2px]" :size="fontSize * 0.75" />
+                      <AlarmClock class="mt-[2px] shrink-0" :size="fontSize * 0.75" />
                       {{ formatTime(item.start_time) }}
                       <template v-if="item.end_time">
                         <br />
@@ -83,7 +83,7 @@
     </div>
     <div class="sticky bottom-0 left-0 right-0 flex flex-col gap-y-1 items-center justify-center px-3 py-2 bg-(--extension-color-background) shadow-[0_-4px_6px_rgba(0,0,0,0.25)]">
       <p class="flex items-center gap-x-1 text-xs text-(--extension-color-text)">
-        <AlarmClock :size="fontSize * 0.75" />
+        <AlarmClock class="shrink-0" :size="fontSize * 0.75" />
         {{ t('schedule.timesInLocalTimezone') }}
       </p>
       <template v-if="scheduleLink">
