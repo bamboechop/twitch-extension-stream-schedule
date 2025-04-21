@@ -1,8 +1,8 @@
-<img src=".github/assets/logo.png" alt="Upcoming Streams Logo" width="300"/>
-
 # Upcoming Streams Twitch Extension
 
 A highly customizable Twitch extension that displays a streamer's schedule in their panel with beautiful themes and extensive configuration options. Built with Vue 3, TypeScript, and Tailwind CSS.
+
+<img src=".github/assets/logo.png" alt="Upcoming Streams Logo" width="300"/>
 
 📦 [Install on Twitch](https://dashboard.twitch.tv/extensions/fx3l6f5p9rssmjsbn4k0s8zq94rd85)
 
@@ -94,11 +94,12 @@ npm run build
 
 ### Development
 
-The project includes three main entry points:
+The project includes four main entry points:
 
 - `src/App.vue` - Development landing page
 - `src/Panel.vue` - The panel view shown on Twitch
 - `src/Config.vue` - Configuration page for broadcasters
+- `src/Mobile.vue` - The mobile view shown in the Twitch app
 
 ## Configuration
 
