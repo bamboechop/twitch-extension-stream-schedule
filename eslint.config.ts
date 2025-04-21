@@ -22,7 +22,7 @@ export default defineConfigWithVueTs(
   {
     rules: {
       'vue/multi-word-component-names': ['error', {
-        ignores: ['Config', 'Panel']
+        ignores: ['Config', 'Mobile', 'Panel']
       }]
     }
   }

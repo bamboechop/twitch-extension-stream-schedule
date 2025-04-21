@@ -1,41 +1,43 @@
 <template>
   <aside class="flex flex-col gap-[16px]">
     <p class="font-sans text-[14px] italic">{{ t('config.previewSchedule') }}</p>
-    <template v-if="!twitchLoading">
-      <template v-if="schedule.length === 0 && broadcasterName">
-        <p class="font-sans text-[16px] font-bold text-yellow-500">
-          {{ t('schedule.addStreamsToSchedule') }}<br />
-          <a :href="scheduleConfigurationLink" target="_blank" class="text-blue-500 font-normal underline">{{ t('schedule.goToSchedule') }}</a>
-        </p>
+    <template v-if="!twitchLoading && schedule.length === 0 && broadcasterName">
+      <p class="font-sans text-[16px] font-bold text-yellow-500">
+        {{ t('schedule.addStreamsToSchedule') }}<br />
+        <a :href="scheduleConfigurationLink" target="_blank" class="text-blue-500 font-normal underline">{{ t('schedule.goToSchedule') }}</a>
+      </p>
+    </template>
+    <div class="flex max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen items-center justify-center">
+      <template v-if="!twitchLoading">
+        <PanelMain
+          :background-color="backgroundColor"
+          :broadcaster-name="broadcasterName"
+          class="border border-[#53535f]"
+          :day-border-color="dayBorderColor"
+          :font-color="fontColor"
+          :font-family="fontFamily"
+          :font-size="fontSize"
+          :header-background-color="headerBackgroundColor"
+          :header-font-color="headerFontColor"
+          :panel-title="panelTitle"
+          :schedule-button-background-color="scheduleButtonBackgroundColor"
+          :schedule-button-font-color="scheduleButtonFontColor"
+          :schedule-items="schedule"
+          :show-category="showCategory"
+          :show-header="showHeader"
+          :show-times="showTimes"
+          :show-title="showTitle"
+          :show-usernames="showUsernames"
+          :time-font-color="timeFontColor"
+          :vacation="previewVacation"
+          :vacation-background-color="vacationBackgroundColor"
+          :vacation-font-color="vacationFontColor"
+          tag="section" />
       </template>
-      <PanelMain
-        :background-color="backgroundColor"
-        :broadcaster-name="broadcasterName"
-        class="border border-[#53535f]"
-        :day-border-color="dayBorderColor"
-        :font-color="fontColor"
-        :font-family="fontFamily"
-        :font-size="fontSize"
-        :header-background-color="headerBackgroundColor"
-        :header-font-color="headerFontColor"
-        :panel-title="panelTitle"
-        :schedule-button-background-color="scheduleButtonBackgroundColor"
-        :schedule-button-font-color="scheduleButtonFontColor"
-        :schedule-items="schedule"
-        :show-category="showCategory"
-        :show-header="showHeader"
-        :show-times="showTimes"
-        :show-title="showTitle"
-        :show-usernames="showUsernames"
-        :time-font-color="timeFontColor"
-        :vacation="previewVacation"
-        :vacation-background-color="vacationBackgroundColor"
-        :vacation-font-color="vacationFontColor"
-        tag="section" />
-    </template>
-    <template v-if="twitchLoading">
-      <CustomLoader class="mx-auto mt-8" />
-    </template>
+      <template v-if="twitchLoading">
+        <CustomLoader />
+      </template>
+    </div>
     <template v-if="showPreviewInfo">
       <div class="flex items-center gap-2">
         <BadgeInfo class="text-neutral-400 shrink-0" :size="18" />

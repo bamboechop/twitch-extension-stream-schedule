@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0] - 2024-04-21
+
+### Added
+- Mobile panel - show off your upcoming streams on mobile now!
+
+### Fixed
+- Panel content higher than maximum height of Twitch panel no longer causes "View full schedule" panel to scroll away from bottom edge of extension frame
+
 ## [1.1.0] - 2024-04-13
 
 ### Added

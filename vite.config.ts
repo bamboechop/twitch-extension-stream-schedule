@@ -11,6 +11,7 @@ export default defineConfig(({ command }) => {
 
   const buildInputs = {
     config: resolve(__dirname, 'config.html'),
+    mobile: resolve(__dirname, 'mobile.html'),
     panel: resolve(__dirname, 'panel.html'),
   }
 

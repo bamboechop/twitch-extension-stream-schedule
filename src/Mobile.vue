@@ -1,5 +1,5 @@
 <template>
-  <div class="flex max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen items-center justify-center">
+  <div class="flex w-screen h-screen items-center justify-center">
     <template v-if="!twitchLoading">
       <PanelMain
         :background-color="config.backgroundColor"
@@ -10,6 +10,7 @@
         :font-size="config.fontSize"
         :header-background-color="config.headerBackgroundColor"
         :header-font-color="config.headerFontColor"
+        is-mobile
         :panel-title="config.panelTitle"
         :schedule-button-background-color="config.scheduleButtonBackgroundColor"
         :schedule-button-font-color="config.scheduleButtonFontColor"
