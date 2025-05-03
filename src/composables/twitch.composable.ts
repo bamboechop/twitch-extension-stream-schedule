@@ -97,9 +97,9 @@ export const useTwitch = () => {
 
   const fetchSchedule = async ({ channelId, clientId, helixToken }: Pick<TwitchExtensionAuthResponse, 'channelId' | 'clientId' | 'helixToken'>) => {
     try {
-      const startTime = new Date();
-      startTime.setHours(0, 0, 0, 0);
-      const startTimeRFC3339 = startTime.toISOString().replace('.000Z', 'Z');
+      const now = new Date();
+      const startTimeUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
+      const startTimeRFC3339 = startTimeUTC.toISOString().replace('.000Z', 'Z');
       const response = await window.fetch(`https://api.twitch.tv/helix/schedule?broadcaster_id=${channelId}&start_time=${startTimeRFC3339}&first=5`, {
         headers: {
           'Authorization': `Extension ${helixToken}`,
@@ -130,6 +130,12 @@ export const useTwitch = () => {
       allScheduleItems.value = data.data.segments;
       vacation.value = data.data.vacation;
       schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
+      console.info('fetchSchedule', {
+        channelId,
+        allScheduleItems: allScheduleItems.value,
+        schedule: schedule.value,
+        startTimeRFC3339,
+      });
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];
