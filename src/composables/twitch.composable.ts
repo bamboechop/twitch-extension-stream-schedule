@@ -41,7 +41,7 @@ export const useTwitch = () => {
     // Process each item to extract usernames
     const processedItems = limitedItems.map(item => {
       const title = item.title;
-      const usernameRegex = /@([a-zA-Z]+)(?:\s|$)/g;
+      const usernameRegex = /@([a-zA-Z0-9][a-zA-Z0-9_]{3,24})(?:\s|$)/g;
       const usernames: string[] = [];
 
       // Extract usernames
