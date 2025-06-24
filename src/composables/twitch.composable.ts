@@ -127,15 +127,9 @@ export const useTwitch = () => {
       }
 
       const data: TwitchStreamScheduleResponse = await response.json();
-      allScheduleItems.value = data.data.segments;
+      allScheduleItems.value = data.data.segments.filter(item => !item.canceled_until); // filter out canceled items
       vacation.value = data.data.vacation;
       schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
-      console.info('fetchSchedule', {
-        channelId,
-        allScheduleItems: allScheduleItems.value,
-        schedule: schedule.value,
-        startTimeRFC3339,
-      });
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];

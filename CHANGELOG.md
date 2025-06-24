@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.2] - 2025-06-24
+
+### Fixed
+- Cancelled recurring streams no longer show up in the list of planned streams.
+
 ## [1.2.1] - 2025-05-03
 
 ### Fixed
