@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.0] - 2025-07-25
+
+### Added
+- Component panel - show off your upcoming streams directly in the video player now
+
 ## [1.2.2] - 2025-06-24
 
 ### Fixed
