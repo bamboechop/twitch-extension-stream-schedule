@@ -4,6 +4,9 @@ declare global {
   interface Window {
     Twitch: {
       ext: {
+        actions: {
+          minimize: () => void;
+        };
         configuration: {
           broadcaster: {
             content: string;
@@ -12,7 +15,7 @@ declare global {
           set: (segment: 'broadcaster', version: string, content: string) => void;
         };
         onAuthorized: (callback: (auth: TwitchExtensionAuthResponse) => void) => void;
-        onContext: (callback: (context: TwitchExtensionContextResponse) => void) => void;
+        onContext: (callback: (context: TwitchExtensionContextResponse, changedContextProperties: string[]) => void) => void;
       };
     };
   }

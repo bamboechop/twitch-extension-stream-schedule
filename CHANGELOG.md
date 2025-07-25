@@ -4,6 +4,7 @@
 
 ### Added
 - Component panel - show off your upcoming streams directly in the video player now
+- Overlay panel - show off your upcoming streams directly as an overlay over the video player now
 
 ## [1.2.2] - 2025-06-24
 

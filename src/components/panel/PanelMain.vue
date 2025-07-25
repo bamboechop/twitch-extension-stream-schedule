@@ -95,6 +95,14 @@
           {{ t('schedule.viewFullSchedule') }}
         </button>
       </template>
+      <template v-if="showMinimizeButton">
+        <button
+          class="absolute bg-(--extension-color-day-border) px-2 py-1 bottom-0 right-0 z-1 cursor-pointer text-(--extension-color-schedule-button-font-color) font-semibold text-xs rounded-tl-md"
+          type="button"
+          @click="minimize">
+          <SquareX :size="fontSize" />
+        </button>
+      </template>
     </div>
   </component>
 </template>
@@ -103,7 +111,7 @@
 import { computed, watch } from 'vue'
 import { useUrlSearchParams } from '@vueuse/core';
 import { useI18n } from 'vue-i18n'
-import { AlarmClock, Tag, User } from 'lucide-vue-next'
+import { AlarmClock, SquareX, Tag, User } from 'lucide-vue-next'
 import type { GroupedScheduleItem, TwitchUrlSearchParams, TwitchStreamScheduleResponse } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
@@ -121,6 +129,7 @@ const {
   scheduleButtonBackgroundColor,
   scheduleButtonFontColor,
   showCategory,
+  showMinimizeButton = false,
   showTimes,
   showTitle,
   showUsernames,
@@ -145,6 +154,7 @@ const {
   scheduleItems: GroupedScheduleItem[]
   showCategory: boolean
   showHeader: boolean
+  showMinimizeButton?: boolean
   showTimes: boolean
   showTitle: boolean
   showUsernames: boolean
@@ -178,6 +188,10 @@ const formatTime = (dateTimeString: string) => {
     minute: '2-digit',
     hour12: !urlParams.locale.startsWith('de'),
   });
+}
+
+const minimize = () => {
+  window.Twitch.ext.actions.minimize();
 }
 
 const scheduleLink = computed(() => {
