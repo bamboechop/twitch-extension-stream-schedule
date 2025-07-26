@@ -3,6 +3,7 @@
 ## [1.3.0] - 2025-07-25
 
 ### Added
+- This update overlay 😎
 - Component panel - show off your upcoming streams directly in the video player now
 - Overlay panel - show off your upcoming streams directly as an overlay over the video player now
 

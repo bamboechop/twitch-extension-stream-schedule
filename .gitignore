@@ -29,3 +29,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# CHANGELOG files in public folder
+public/CHANGELOG*.md

@@ -1,5 +1,5 @@
 <template>
-  <section class="grid lg:grid-cols-[1fr_340px] gap-[24px] p-[16px]">
+  <section class="grid lg:grid-cols-[1fr_340px] gap-[24px] p-[16px] relative">
     <ConfigMain
       :amount-of-schedule-items="config.amountOfScheduleItems"
       :background-color="config.backgroundColor"
@@ -65,23 +65,45 @@
       :time-font-color="config.timeFontColor"
       :vacation-background-color="config.vacationBackgroundColor"
       :vacation-font-color="config.vacationFontColor" />
+    <template v-if="showUpdateOverlay">
+      <UpdateOverlay @close="handleUpdateOverlayClose" />
+    </template>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useTwitch } from '@/composables/twitch.composable'
 import ConfigMain from './components/config/ConfigMain.vue'
 import ConfigPreview from './components/config/ConfigPreview.vue'
 import type { TwitchExtensionTheme } from './common/interfaces/twitch.interface'
+import UpdateOverlay from './components/update-overlay/UpdateOverlay.vue'
+import { version } from '../package.json'
 
 const { config, saveConfig, updateTheme } = useTwitch()
 const showSuccessMessage = ref(false)
 const selectedView = ref<'general' | 'appearance' | 'typography'>('general')
 
+const shouldShowUpdateOverlay = computed(() => {
+  const lastSeenVersion = config.value.lastSeenVersion
+  return !lastSeenVersion || lastSeenVersion !== version
+})
+
+const showUpdateOverlay = ref(shouldShowUpdateOverlay.value)
+
 const handleThemeChange = (theme: TwitchExtensionTheme) => {
   updateTheme(theme)
 }
+
+const handleUpdateOverlayClose = async () => {
+  config.value.lastSeenVersion = version
+  await saveConfig()
+  showUpdateOverlay.value = false
+}
+
+watch(shouldShowUpdateOverlay, (newValue) => {
+  showUpdateOverlay.value = newValue
+})
 
 const save = () => {
   try {
@@ -94,4 +116,6 @@ const save = () => {
     console.error('Error saving config:', error)
   }
 }
+
+
 </script>

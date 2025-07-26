@@ -73,5 +73,10 @@
       "fontFamily": "Schriftart",
       "fontSize": "Schriftgröße (12px - 18px)"
     }
+  },
+  "updateOverlay": {
+    "title": "Neues Update!",
+    "error": "Fehler beim Laden des Changelogs: {error}",
+    "noChanges": "Keine detaillierten Änderungen für diese Version verfügbar."
   }
 }
