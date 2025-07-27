@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-0 left-0 right-0 bottom-0 p-8 bg-black/25">
+  <div class="absolute font-sans top-0 left-0 right-0 bottom-0 p-8 bg-black/25">
     <div class="bg-[#0e0e10] text-white rounded-lg max-h-[505px] max-w-xl h-full w-full flex flex-col gap-y-2 p-6 shadow-xl relative mx-auto border-lime-600 border-2">
       <button
         class="absolute top-6 right-6 hover:text-red-400 transition-colors cursor-pointer"
