@@ -1,5 +1,5 @@
 <template>
-  <div class="border-(--extension-color-day-border) border-4 border-l-0 flex max-h-twitch-iframe-height max-w-[322px] items-center justify-center w-full mb-12 h-[calc(100%-96px)]">
+  <div class="bg-(--extension-color-background) border-(--extension-color-day-border) border-4 border-l-0 flex max-h-twitch-iframe-height max-w-[322px] items-center justify-center w-full mb-12 h-[calc(100%-96px)]">
     <template v-if="!twitchLoading">
       <PanelMain
         :background-color="config.backgroundColor"
