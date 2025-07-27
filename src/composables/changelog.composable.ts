@@ -100,7 +100,12 @@ export function useChangelog() {
       const lang = language || getLanguageFromUrl()
       const fileName = lang === 'de' ? 'CHANGELOG-de.md' : 'CHANGELOG.md'
 
-      const response = await fetch(`/${fileName}`)
+      // Use absolute path in development, relative path in production
+      // This matches the Vite config pattern: base: isProduction ? './' : '/'
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      const filePath = isLocalhost ? `/${fileName}` : `./${fileName}`
+
+      const response = await fetch(filePath)
       if (!response.ok) {
         throw new Error(`Failed to load changelog: ${response.status}`)
       }
