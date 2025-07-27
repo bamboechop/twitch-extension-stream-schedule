@@ -10,8 +10,10 @@ export default defineConfig(({ command }) => {
   const isProduction = command === 'build'
 
   const buildInputs = {
+    component: resolve(__dirname, 'video_component.html'),
     config: resolve(__dirname, 'config.html'),
     mobile: resolve(__dirname, 'mobile.html'),
+    overlay: resolve(__dirname, 'video_overlay.html'),
     panel: resolve(__dirname, 'panel.html'),
   }
 
