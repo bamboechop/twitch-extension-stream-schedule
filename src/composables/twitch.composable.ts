@@ -135,7 +135,6 @@ export const useTwitch = () => {
       allScheduleItems.value = data.data.segments.filter(item => !item.canceled_until); // filter out canceled items
       vacation.value = data.data.vacation;
       schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
-      console.log({ schedule: schedule.value });
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];
