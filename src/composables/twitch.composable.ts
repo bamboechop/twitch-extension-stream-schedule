@@ -7,9 +7,11 @@ import type {
   GroupedScheduleItem,
   TwitchExtensionTheme,
   TwitchExtensionThemeConfiguration,
+  TwitchUrlSearchParams,
 } from '@/common/interfaces/twitch.interface';
 import { ref, watch } from 'vue';
 import { themes } from '@/common/themes';
+import { useUrlSearchParams } from '@vueuse/core';
 
 // Store shared state outside the composable to persist between re-renders
 const allScheduleItems = ref<TwitchStreamScheduleSegment[]>([]);
@@ -30,6 +32,8 @@ const config = ref<TwitchExtensionConfiguration>({
 });
 const darkMode = ref<boolean>(false);
 const vacation = ref<TwitchStreamScheduleResponse['data']['vacation']>(null);
+
+const urlParams = useUrlSearchParams<TwitchUrlSearchParams>('history');
 
 export const useTwitch = () => {
   const schedule = ref<GroupedScheduleItem[]>([]);
@@ -60,7 +64,7 @@ export const useTwitch = () => {
 
     // Then group them by date
     const groupedSchedule = processedItems.reduce((acc: { [key: string]: TwitchStreamScheduleSegment[] }, item) => {
-      const date = new Date(item.start_time).toISOString().split('T')[0];
+      const date = new Date(item.start_time).toLocaleDateString(urlParams.locale, { day: 'numeric', month: 'numeric', year: 'numeric' });
       if (!acc[date]) {
         acc[date] = [];
       }
@@ -131,6 +135,7 @@ export const useTwitch = () => {
       allScheduleItems.value = data.data.segments.filter(item => !item.canceled_until); // filter out canceled items
       vacation.value = data.data.vacation;
       schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
+      console.log({ schedule: schedule.value });
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];

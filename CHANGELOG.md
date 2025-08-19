@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.1] - 2025-08-19
+
+### Fixed
+- Schedule grouping now uses locale-aware date formatting and preserves timezone information in date headers
+
 ## [1.3.0] - 2025-07-25
 
 ### Added

@@ -32,7 +32,7 @@
           <template v-for="group in scheduleItems" :key="group.date">
             <div class="flex flex-col">
               <div class="flex items-center gap-x-2">
-                <h2 class="text-md font-bold opacity-75 uppercase">{{ formatDay(group.date) }} <span class="text-sm">({{ formatDate(group.date) }})</span></h2>
+                <h2 class="text-md font-bold opacity-75 uppercase">{{ formatDay(group.items[0].start_time) }} <span class="text-sm">({{ formatDate(group.items[0].start_time) }})</span></h2>
                 <hr class="bg-(--extension-color-day-border) h-[2px] border-0 grow" />
               </div>
               <div class="flex flex-col gap-y-2">
