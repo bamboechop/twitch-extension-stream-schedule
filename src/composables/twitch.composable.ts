@@ -1,6 +1,7 @@
 import type {
   TwitchExtensionAuthResponse,
   TwitchExtensionConfiguration,
+  TwitchStreamsResponse,
   TwitchStreamScheduleResponse,
   TwitchStreamScheduleSegment,
   TwitchUserResponse,
@@ -27,6 +28,7 @@ const config = ref<TwitchExtensionConfiguration>({
   lastSeenVersion: undefined,
   panelTitle: '',
   showCategory: true,
+  showCountdown: true,
   showHeader: true,
   showTimes: true,
   showTitle: true,
@@ -34,6 +36,8 @@ const config = ref<TwitchExtensionConfiguration>({
   theme: 'default',
 });
 const darkMode = ref<boolean>(false);
+const isLive = ref<boolean>(false);
+const storedAuth = ref<Pick<TwitchExtensionAuthResponse, 'channelId' | 'clientId' | 'helixToken'> | null>(null);
 const vacation = ref<TwitchStreamScheduleResponse['data']['vacation']>(null);
 
 const urlParams = useUrlSearchParams<TwitchUrlSearchParams>('history');
@@ -173,6 +177,42 @@ export const useTwitch = () => {
     }
   }
 
+  const LIVE_POLL_INTERVAL_MS = 30_000;
+  let livePollingTimer: ReturnType<typeof setInterval> | null = null;
+
+  const checkIfLive = async () => {
+    if (!storedAuth.value) return;
+    try {
+      const response = await window.fetch(
+        `https://api.twitch.tv/helix/streams?user_id=${storedAuth.value.channelId}`,
+        {
+          headers: {
+            'Authorization': `Extension ${storedAuth.value.helixToken}`,
+            'Client-ID': storedAuth.value.clientId,
+          },
+        },
+      );
+      if (!response.ok) return;
+      const data: TwitchStreamsResponse = await response.json();
+      isLive.value = data.data.length > 0 && data.data[0].type === 'live';
+    } catch {
+      // Silently ignore -- we'll retry on the next poll
+    }
+  };
+
+  const startLivePolling = () => {
+    if (livePollingTimer) return;
+    checkIfLive();
+    livePollingTimer = setInterval(checkIfLive, LIVE_POLL_INTERVAL_MS);
+  };
+
+  const stopLivePolling = () => {
+    if (livePollingTimer) {
+      clearInterval(livePollingTimer);
+      livePollingTimer = null;
+    }
+  };
+
   // Watch for changes in amountOfScheduleItems and update the displayed schedule
   watch(() => config.value.amountOfScheduleItems, (newValue) => {
     schedule.value = groupScheduleItems(newValue);
@@ -204,6 +244,8 @@ export const useTwitch = () => {
   const expandThemeColors = (themeConfig: TwitchExtensionThemeConfiguration): TwitchExtensionThemeConfiguration => {
     return {
       backgroundColor: expandShortHex(themeConfig.backgroundColor),
+      countdownBackgroundColor: expandShortHex(themeConfig.countdownBackgroundColor),
+      countdownFontColor: expandShortHex(themeConfig.countdownFontColor),
       dayBorderColor: expandShortHex(themeConfig.dayBorderColor),
       fontColor: expandShortHex(themeConfig.fontColor),
       headerBackgroundColor: expandShortHex(themeConfig.headerBackgroundColor),
@@ -240,6 +282,7 @@ export const useTwitch = () => {
         lastSeenVersion: currentConfig.lastSeenVersion,
         panelTitle: currentConfig.panelTitle,
         showCategory: currentConfig.showCategory,
+        showCountdown: currentConfig.showCountdown,
         showTimes: currentConfig.showTimes,
         showTitle: currentConfig.showTitle,
         showUsernames: currentConfig.showUsernames,
@@ -269,6 +312,8 @@ export const useTwitch = () => {
           // For color values, only take them from parsedConfig if we're using a custom theme
           ...(parsedConfig.theme === 'custom' ? {
             backgroundColor: parsedConfig.backgroundColor,
+            countdownBackgroundColor: parsedConfig.countdownBackgroundColor,
+            countdownFontColor: parsedConfig.countdownFontColor,
             dayBorderColor: parsedConfig.dayBorderColor,
             fontColor: parsedConfig.fontColor,
             headerBackgroundColor: parsedConfig.headerBackgroundColor,
@@ -291,19 +336,15 @@ export const useTwitch = () => {
   });
 
   window.Twitch.ext.onAuthorized(async (auth) => {
-    // fetch broadcaster info
-    await fetchBroadcasterInfo({
+    storedAuth.value = {
       channelId: auth.channelId,
       clientId: auth.clientId,
       helixToken: auth.helixToken,
-    });
+    };
 
-    // fetch schedule
-    await fetchSchedule({
-      channelId: auth.channelId,
-      clientId: auth.clientId,
-      helixToken: auth.helixToken,
-    });
+    await fetchBroadcasterInfo(storedAuth.value);
+    await fetchSchedule(storedAuth.value);
+    await checkIfLive();
 
     twitchLoading.value = false;
   });
@@ -311,10 +352,13 @@ export const useTwitch = () => {
   return {
     broadcasterName,
     config,
+    isLive,
     schedule,
     twitchLoading,
     vacation,
     saveConfig,
+    startLivePolling,
+    stopLivePolling,
     updateTheme,
   };
 };

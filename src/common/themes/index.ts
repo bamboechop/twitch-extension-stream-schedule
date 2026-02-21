@@ -4,6 +4,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   default: {
     backgroundColor: '#222222',
     dayBorderColor: '#62e9ff',
+    countdownBackgroundColor: '#62e9ff',
+    countdownFontColor: '#62e9ff',
     fontColor: '#eeeeee',
     headerBackgroundColor: '#111111',
     headerFontColor: '#eeeeee',
@@ -15,6 +17,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   neonNights: {
     backgroundColor: '#120e29',
+    countdownBackgroundColor: '#ff00ff',
+    countdownFontColor: '#ff00ff',
     dayBorderColor: '#ff00ff',
     fontColor: '#ffffff',
     headerBackgroundColor: '#0a0718',
@@ -27,6 +31,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   mintChocolate: {
     backgroundColor: '#2a2118',
+    countdownBackgroundColor: '#4ecca3',
+    countdownFontColor: '#4ecca3',
     dayBorderColor: '#4ecca3',
     fontColor: '#eeeeee',
     headerBackgroundColor: '#1a150f',
@@ -39,6 +45,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   sunsetVibes: {
     backgroundColor: '#2b2d42',
+    countdownBackgroundColor: '#f8961e',
+    countdownFontColor: '#f8961e',
     dayBorderColor: '#f8961e',
     fontColor: '#edf2f4',
     headerBackgroundColor: '#1a1b2e',
@@ -51,6 +59,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   royalPurple: {
     backgroundColor: '#2e1a47',
+    countdownBackgroundColor: '#ffd700',
+    countdownFontColor: '#ffd700',
     dayBorderColor: '#ffd700',
     fontColor: '#f8f9fa',
     headerBackgroundColor: '#1d0b2e',
@@ -63,6 +73,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   enchantedForest: {
     backgroundColor: '#1e352f',
+    countdownBackgroundColor: '#a1cca5',
+    countdownFontColor: '#a1cca5',
     dayBorderColor: '#a1cca5',
     fontColor: '#f1f7ed',
     headerBackgroundColor: '#132a27',
@@ -75,6 +87,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   retroWave: {
     backgroundColor: '#2b213a',
+    countdownBackgroundColor: '#ff71ce',
+    countdownFontColor: '#ff71ce',
     dayBorderColor: '#ff71ce',
     fontColor: '#fffbf7',
     headerBackgroundColor: '#241b31',
@@ -87,6 +101,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   crystalClear: {
     backgroundColor: '#ffffff',
+    countdownBackgroundColor: '#0a55d3',
+    countdownFontColor: '#0a55d3',
     dayBorderColor: '#3b82f6',
     fontColor: '#1f2937',
     headerBackgroundColor: '#f3f4f6',
@@ -99,6 +115,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   sakuraSpring: {
     backgroundColor: '#fdf2f8',
+    countdownBackgroundColor: '#be185d',
+    countdownFontColor: '#be185d',
     dayBorderColor: '#ec4899',
     fontColor: '#831843',
     headerBackgroundColor: '#fbcfe8',
@@ -111,6 +129,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   oceanBreeze: {
     backgroundColor: '#f0fdfa',
+    countdownBackgroundColor: '#0f766e',
+    countdownFontColor: '#0f766e',
     dayBorderColor: '#14b8a6',
     fontColor: '#134e4a',
     headerBackgroundColor: '#ccfbf1',
@@ -123,6 +143,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   deepSpace: {
     backgroundColor: '#030712',
+    countdownBackgroundColor: '#7c3aed',
+    countdownFontColor: '#7c3aed',
     dayBorderColor: '#8b5cf6',
     fontColor: '#e2e8f0',
     headerBackgroundColor: '#0f172a',
@@ -135,6 +157,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   goldenHour: {
     backgroundColor: '#fffbeb',
+    countdownBackgroundColor: '#92400e',
+    countdownFontColor: '#92400e',
     dayBorderColor: '#d97706',
     fontColor: '#78350f',
     headerBackgroundColor: '#fef3c7',
@@ -147,6 +171,8 @@ export const themes: Record<Exclude<TwitchExtensionTheme, 'custom'>, TwitchExten
   },
   lavenderFields: {
     backgroundColor: '#faf5ff',
+    countdownBackgroundColor: '#7e22ce',
+    countdownFontColor: '#7e22ce',
     dayBorderColor: '#9333ea',
     fontColor: '#581c87',
     headerBackgroundColor: '#f3e8ff',

@@ -77,6 +77,8 @@ const groupedThemes = computed(() => {
 
 const props = defineProps<{
   backgroundColor: string
+  countdownBackgroundColor: string
+  countdownFontColor: string
   dayBorderColor: string
   fontColor: string
   headerBackgroundColor: string
@@ -108,6 +110,9 @@ const colorConfigs = [
   // Schedule colors
   { id: 'dayBorderColor', label: 'Day border color' },
   { id: 'timeFontColor', label: 'Time font color' },
+  // Countdown colors
+  { id: 'countdownBackgroundColor', label: 'Countdown background color' },
+  { id: 'countdownFontColor', label: 'Countdown font color' },
   // Vacation notice colors
   { id: 'vacationBackgroundColor', label: 'Vacation notice background color' },
   { id: 'vacationFontColor', label: 'Vacation notice font color' },
@@ -116,6 +121,8 @@ const colorConfigs = [
 // Keep track of expanded color values for the color pickers
 const colorValues = ref({
   backgroundColor: props.backgroundColor,
+  countdownBackgroundColor: props.countdownBackgroundColor,
+  countdownFontColor: props.countdownFontColor,
   dayBorderColor: props.dayBorderColor,
   headerBackgroundColor: props.headerBackgroundColor,
   fontColor: props.fontColor,

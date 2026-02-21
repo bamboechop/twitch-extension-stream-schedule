@@ -12,6 +12,7 @@
               :amount-of-schedule-items="amountOfScheduleItems"
               :panel-title="panelTitle"
               :show-category="showCategory"
+              :show-countdown="showCountdown"
               :show-header="showHeader"
               :show-times="showTimes"
               :show-title="showTitle"
@@ -19,6 +20,7 @@
               @update:amount-of-schedule-items="emits('update:amount-of-schedule-items', $event)"
               @update:panel-title="emits('update:panel-title', $event)"
               @update:show-category="emits('update:show-category', $event)"
+              @update:show-countdown="emits('update:show-countdown', $event)"
               @update:show-header="emits('update:show-header', $event)"
               @update:show-times="emits('update:show-times', $event)"
               @update:show-title="emits('update:show-title', $event)"
@@ -27,6 +29,8 @@
           <template v-if="selectedView === 'appearance'">
             <ConfigAppearance
               :background-color="backgroundColor"
+              :countdown-background-color="countdownBackgroundColor"
+              :countdown-font-color="countdownFontColor"
               :day-border-color="dayBorderColor"
               :font-color="fontColor"
               :header-background-color="headerBackgroundColor"
@@ -38,6 +42,8 @@
               :vacation-background-color="vacationBackgroundColor"
               :vacation-font-color="vacationFontColor"
               @update:background-color="emits('update:background-color', $event)"
+              @update:countdown-background-color="emits('update:countdown-background-color', $event)"
+              @update:countdown-font-color="emits('update:countdown-font-color', $event)"
               @update:day-border-color="emits('update:day-border-color', $event)"
               @update:font-color="emits('update:font-color', $event)"
               @update:header-background-color="emits('update:header-background-color', $event)"
@@ -96,6 +102,8 @@ const { t } = useI18n({ useScope: 'global' })
 defineProps<{
   amountOfScheduleItems: number
   backgroundColor: string
+  countdownBackgroundColor: string
+  countdownFontColor: string
   dayBorderColor: string
   fontColor: string
   fontFamily: string
@@ -106,6 +114,7 @@ defineProps<{
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean
+  showCountdown: boolean
   showHeader: boolean
   showSuccessMessage: boolean
   showTimes: boolean
@@ -121,6 +130,8 @@ const emits = defineEmits<{
   (e: 'save-config'): void
   (e: 'update:amount-of-schedule-items', value: number): void
   (e: 'update:background-color', value: string): void
+  (e: 'update:countdown-background-color', value: string): void
+  (e: 'update:countdown-font-color', value: string): void
   (e: 'update:day-border-color', value: string): void
   (e: 'update:font-color', value: string): void
   (e: 'update:font-family', value: string): void
@@ -132,6 +143,7 @@ const emits = defineEmits<{
   (e: 'update:schedule-button-font-color', value: string): void
   (e: 'update:selected-view', value: 'general' | 'appearance' | 'typography'): void
   (e: 'update:show-category', value: boolean): void
+  (e: 'update:show-countdown', value: boolean): void
   (e: 'update:show-header', value: boolean): void
   (e: 'update:show-times', value: boolean): void
   (e: 'update:show-title', value: boolean): void

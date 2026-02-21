@@ -4,6 +4,7 @@
 
 ### Added
 - You can show up to 7 upcoming streams now.
+- You can display a counter to the next stream start now.
 
 ### Fixed
 - When a recurring stream is canceled the extension now tries to find more non-canceled streams to still display the configured amount of streams to be shown.

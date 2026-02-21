@@ -17,7 +17,21 @@
     "goToSchedule": "Go to schedule",
     "onVacation": "Time for a break! 🌴",
     "vacationMessage": "{streamerName} is taking a well deserved vacation from {start} to {end}.",
-    "previewVacationInfo": "Showing vacation notice to help with color selection. It won't be visible outside of the preview, unless the vacation mode is disabled."
+    "previewVacationInfo": "Showing vacation notice to help with color selection. It won't be visible outside of the preview, unless the vacation mode is enabled.",
+    "previewCountdownState": {
+      "countdown": "Countdown",
+      "grace": "Going live",
+      "live": "Live"
+    },
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "title": "Countdown to next stream",
+      "gracePeriod": "{streamerName} should be online any minute now",
+      "live": "{streamerName} is live!"
+    }
   },
   "config": {
     "customizeSchedule": "Customize how your stream schedule looks like",
@@ -26,6 +40,7 @@
       "title": "General",
       "numberOfItems": "Number of schedule items (1-7)",
       "showHeader": "Show panel title",
+      "showCountdown": "Show countdown to next stream",
       "showStreamTitle": "Show stream title",
       "showStreamCategory": "Show stream category",
       "showStreamTimes": "Show stream times",
@@ -44,6 +59,8 @@
       "scheduleButtonBackgroundColor": "Schedule button background color",
       "scheduleButtonFontColor": "Schedule button font color",
       "timeFontColor": "Time font color",
+      "countdownBackgroundColor": "Countdown background color",
+      "countdownFontColor": "Countdown font color",
       "vacationBackgroundColor": "Vacation notice background color",
       "vacationFontColor": "Vacation notice font color",
       "themes": {

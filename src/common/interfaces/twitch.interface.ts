@@ -33,6 +33,20 @@ export interface TwitchStreamScheduleResponse {
   };
 }
 
+export interface TwitchStreamsResponse {
+  data: {
+    id: string;
+    user_id: string;
+    user_login: string;
+    user_name: string;
+    game_id: string;
+    game_name: string;
+    type: 'live' | '';
+    title: string;
+    started_at: string;
+  }[];
+}
+
 export interface TwitchUserResponse {
   data: {
     id: string;
@@ -61,10 +75,14 @@ export interface TwitchExtensionContextResponse {
   theme: 'light' | 'dark';
 }
 
+export type CountdownState = 'countdown' | 'grace' | 'live';
+
 export type TwitchExtensionTheme = 'default' | 'neonNights' | 'mintChocolate' | 'sunsetVibes' | 'royalPurple' | 'enchantedForest' | 'retroWave' | 'crystalClear' | 'sakuraSpring' | 'oceanBreeze' | 'deepSpace' | 'goldenHour' | 'lavenderFields' | 'custom';
 
 export interface TwitchExtensionThemeConfiguration {
   backgroundColor: string;
+  countdownBackgroundColor: string;
+  countdownFontColor: string;
   dayBorderColor: string;
   fontColor: string;
   headerBackgroundColor: string;
@@ -83,6 +101,7 @@ export interface TwitchExtensionConfiguration extends TwitchExtensionThemeConfig
   lastSeenVersion?: string;
   panelTitle: string;
   showCategory: boolean;
+  showCountdown: boolean;
   showHeader: boolean;
   showTimes: boolean;
   showTitle: boolean;

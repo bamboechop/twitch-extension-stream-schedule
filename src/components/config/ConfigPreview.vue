@@ -7,23 +7,42 @@
         <a :href="scheduleConfigurationLink" target="_blank" class="text-blue-500 font-normal underline">{{ t('schedule.goToSchedule') }}</a>
       </p>
     </template>
+    <template v-if="showCountdown">
+      <div class="flex items-center gap-x-2">
+        <template v-for="option in countdownStateOptions" :key="option">
+          <button
+            class="text-xs px-3 py-1 rounded-full cursor-pointer border transition-colors duration-200"
+            :class="(previewCountdownState ?? 'countdown') === option
+              ? 'bg-teal-600 text-white border-teal-600'
+              : 'bg-transparent text-neutral-400 border-neutral-500 hover:border-neutral-300'"
+            @click="previewCountdownState = option">
+            {{ t(`schedule.previewCountdownState.${option}`) }}
+          </button>
+        </template>
+      </div>
+    </template>
     <div class="flex max-h-twitch-iframe-height max-w-twitch-iframe-width h-screen items-center justify-center">
       <template v-if="!twitchLoading">
         <PanelMain
           :background-color="backgroundColor"
           :broadcaster-name="broadcasterName"
           class="border border-[#53535f]"
+          :countdown-background-color="countdownBackgroundColor"
+          :countdown-font-color="countdownFontColor"
+          :countdown-state-override="previewCountdownState"
           :day-border-color="dayBorderColor"
           :font-color="fontColor"
           :font-family="fontFamily"
           :font-size="fontSize"
           :header-background-color="headerBackgroundColor"
           :header-font-color="headerFontColor"
+          :is-live="isLive"
           :panel-title="panelTitle"
           :schedule-button-background-color="scheduleButtonBackgroundColor"
           :schedule-button-font-color="scheduleButtonFontColor"
           :schedule-items="schedule"
           :show-category="showCategory"
+          :show-countdown="showCountdown"
           :show-header="showHeader"
           :show-times="showTimes"
           :show-title="showTitle"
@@ -48,17 +67,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n'
 import PanelMain from '../panel/PanelMain.vue'
 import { useTwitch } from '@/composables/twitch.composable';
 import CustomLoader from '../common/CustomLoader.vue';
 import { BadgeInfo } from 'lucide-vue-next';
+import type { CountdownState } from '@/common/interfaces/twitch.interface';
 
 const { t } = useI18n({ useScope: 'global' })
 
 const props = defineProps<{
   backgroundColor: string
+  countdownBackgroundColor: string
+  countdownFontColor: string
   dayBorderColor: string
   fontColor: string
   fontFamily: string
@@ -69,6 +91,7 @@ const props = defineProps<{
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean
+  showCountdown: boolean
   showHeader: boolean
   showTimes: boolean
   showTitle: boolean
@@ -79,7 +102,10 @@ const props = defineProps<{
   vacationFontColor: string
 }>()
 
-const { broadcasterName, schedule, twitchLoading, vacation: realVacation } = useTwitch();
+const { broadcasterName, isLive, schedule, twitchLoading, vacation: realVacation } = useTwitch();
+
+const previewCountdownState = ref<CountdownState | undefined>(undefined);
+const countdownStateOptions: CountdownState[] = ['countdown', 'grace', 'live'];
 
 // Show info text only when we're showing the preview vacation
 const showPreviewInfo = computed(() => props.selectedView === 'appearance' && !realVacation.value);

@@ -17,7 +17,21 @@
     "goToSchedule": "Zum Zeitplan",
     "onVacation": "Zeit für eine Pause! 🌴",
     "vacationMessage": "{streamerName} ist von {start} bis {end} im wohlverdienten Urlaub.",
-    "previewVacationInfo": "Die Urlaubsbenachrichtigung wird angezeigt, um bei der Farbauswahl zu unterstützen. Wird außerhalb der Vorschau nur angezeigt, wenn der Urlaubsmodus aktiviert ist."
+    "previewVacationInfo": "Die Urlaubsbenachrichtigung wird angezeigt, um bei der Farbauswahl zu unterstützen. Wird außerhalb der Vorschau nur angezeigt, wenn der Urlaubsmodus aktiviert ist.",
+    "previewCountdownState": {
+      "countdown": "Countdown",
+      "grace": "Geht live",
+      "live": "Live"
+    },
+    "countdown": {
+      "days": "Tage",
+      "hours": "Stunden",
+      "minutes": "Minuten",
+      "seconds": "Sekunden",
+      "title": "Countdown zum nächsten Stream",
+      "gracePeriod": "{streamerName} sollte jeden Moment online sein",
+      "live": "{streamerName} ist live!"
+    }
   },
   "config": {
     "customizeSchedule": "Passe an, wie dein Stream-Zeitplan aussehen soll",
@@ -26,6 +40,7 @@
       "title": "Allgemein",
       "numberOfItems": "Anzahl der Zeitplan-Einträge (1-7)",
       "showHeader": "Panel-Titel anzeigen",
+      "showCountdown": "Countdown zum nächsten Stream anzeigen",
       "showStreamTitle": "Stream-Titel anzeigen",
       "showStreamCategory": "Stream-Kategorie anzeigen",
       "showStreamTimes": "Stream-Zeiten anzeigen",
@@ -44,6 +59,8 @@
       "scheduleButtonBackgroundColor": "Zeitplan-Button-Hintergrundfarbe",
       "scheduleButtonFontColor": "Zeitplan-Button-Schriftfarbe",
       "timeFontColor": "Zeit-Schriftfarbe",
+      "countdownBackgroundColor": "Countdown-Hintergrundfarbe",
+      "countdownFontColor": "Countdown-Schriftfarbe",
       "vacationBackgroundColor": "Urlaubsbenachrichtigung-Hintergrundfarbe",
       "vacationFontColor": "Urlaubsbenachrichtigung-Schriftfarbe",
       "themes": {

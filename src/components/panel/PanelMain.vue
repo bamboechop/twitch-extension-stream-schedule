@@ -29,6 +29,47 @@
           </div>
         </template>
         <template v-if="scheduleItems.length > 0">
+          <template v-if="showCountdown">
+            <div
+              class="flex flex-col items-center justify-center mb-2 p-4 rounded-md border"
+              :class="{ 'pt-2': countdownState === 'countdown', }"
+              :style="{
+                backgroundColor: `${countdownBackgroundColor}1A`,
+                borderColor: `${countdownBackgroundColor}33`
+              }">
+              <template v-if="countdownState === 'countdown'">
+                <p class="text-sm uppercase tracking-tight opacity-85 font-bold" :style="{ color: countdownFontColor }">{{ t('schedule.countdown.title') }}</p>
+                <div class="flex items-center gap-x-4">
+                  <template v-if="countdown.days > 0">
+                    <p class="countdown-label countdown-days" :style="{ color: countdownFontColor }">{{ countdown.days.toString().padStart(2, '0') }}</p>
+                    <p class="text-xs">:</p>
+                  </template>
+                  <template v-if="countdown.hours > 0 || countdown.days > 0">
+                    <p class="countdown-label countdown-hours" :style="{ color: countdownFontColor }">{{ countdown.hours.toString().padStart(2, '0') }}</p>
+                    <p class="text-xs">:</p>
+                  </template>
+                  <template v-if="countdown.minutes > 0 || countdown.hours > 0">
+                    <p class="countdown-label countdown-minutes" :style="{ color: countdownFontColor }">{{ countdown.minutes.toString().padStart(2, '0') }}</p>
+                    <p class="text-xs">:</p>
+                  </template>
+                  <p class="countdown-label countdown-seconds" :style="{ color: countdownFontColor }">{{ countdown.seconds.toString().padStart(2, '0') }}</p>
+                </div>
+              </template>
+              <template v-else-if="countdownState === 'grace'">
+                <p class="text-sm text-center font-bold text-balance" :style="{ color: countdownFontColor }">
+                  {{ t('schedule.countdown.gracePeriod', { streamerName: broadcasterName }) }}
+                </p>
+              </template>
+              <template v-else-if="countdownState === 'live'">
+                <div class="flex items-center gap-x-2">
+                  <Radio class="text-red-500 animate-pulse" :size="fontSize + 4" />
+                  <p class="text-sm text-center font-bold leading-none text-balance" :style="{ color: countdownFontColor }">
+                    {{ t('schedule.countdown.live', { streamerName: broadcasterName }) }}
+                  </p>
+                </div>
+              </template>
+            </div>
+          </template>
           <template v-for="group in scheduleItems" :key="group.date">
             <div class="flex flex-col">
               <div class="flex items-center gap-x-2">
@@ -108,31 +149,39 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
-import { useUrlSearchParams } from '@vueuse/core';
+import { computed, onUnmounted, watch } from 'vue'
+import { useNow, useUrlSearchParams } from '@vueuse/core';
 import { useI18n } from 'vue-i18n'
-import { AlarmClock, SquareX, Tag, User } from 'lucide-vue-next'
-import type { GroupedScheduleItem, TwitchUrlSearchParams, TwitchStreamScheduleResponse } from '@/common/interfaces/twitch.interface'
+import { AlarmClock, Radio, SquareX, Tag, User } from 'lucide-vue-next'
+import type { CountdownState, GroupedScheduleItem, TwitchUrlSearchParams, TwitchStreamScheduleResponse } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
 
 const {
   backgroundColor,
   broadcasterName,
+  countdownBackgroundColor,
+  countdownFontColor,
+  countdownStateOverride,
   dayBorderColor,
   fontColor,
   fontFamily,
   fontSize,
   headerBackgroundColor,
   headerFontColor,
+  isLive = false,
   isMobile = false,
   scheduleButtonBackgroundColor,
   scheduleButtonFontColor,
+  scheduleItems,
   showCategory,
+  showCountdown,
   showMinimizeButton = false,
   showTimes,
   showTitle,
   showUsernames,
+  startLivePolling,
+  stopLivePolling,
   tag = 'main',
   timeFontColor,
   vacation,
@@ -141,23 +190,30 @@ const {
 } = defineProps<{
   backgroundColor: string
   broadcasterName: string
+  countdownBackgroundColor: string
+  countdownFontColor: string
+  countdownStateOverride?: CountdownState
   dayBorderColor: string
   fontColor: string
   fontFamily: string
   fontSize: number
   headerBackgroundColor: string
   headerFontColor: string
+  isLive?: boolean
   isMobile?: boolean
   panelTitle: string
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   scheduleItems: GroupedScheduleItem[]
   showCategory: boolean
+  showCountdown: boolean
   showHeader: boolean
   showMinimizeButton?: boolean
   showTimes: boolean
   showTitle: boolean
   showUsernames: boolean
+  startLivePolling?: () => void
+  stopLivePolling?: () => void
   tag?: string
   timeFontColor: string
   vacation: TwitchStreamScheduleResponse['data']['vacation']
@@ -166,6 +222,16 @@ const {
 }>()
 
 const urlParams = useUrlSearchParams<TwitchUrlSearchParams>('history');
+
+const countdownTranslations = computed(() => {
+  // We need to wrap the translations in quotes to prevent them from being interpreted as CSS variables
+  return {
+    days: `"${t('schedule.countdown.days')}"`,
+    hours: `"${t('schedule.countdown.hours')}"`,
+    minutes: `"${t('schedule.countdown.minutes')}"`,
+    seconds: `"${t('schedule.countdown.seconds')}"`,
+  };
+})
 
 const formatDate = (dateString: string, options: Intl.DateTimeFormatOptions = {}) => {
   const defaultOptions: Intl.DateTimeFormatOptions = {
@@ -193,6 +259,62 @@ const formatTime = (dateTimeString: string) => {
 const minimize = () => {
   window.Twitch.ext.actions.minimize();
 }
+
+const now = useNow({ interval: 1000 });
+const GRACE_PERIOD_MS = 30 * 60 * 1000;
+
+const allItems = computed(() =>
+  scheduleItems.flatMap(group => group.items),
+);
+
+const nextStreamStartTime = computed<Date | null>(() => {
+  const item = allItems.value.find(item => new Date(item.start_time) > now.value);
+  return item ? new Date(item.start_time) : null;
+});
+
+const graceTarget = computed<Date | null>(() => {
+  for (const item of allItems.value) {
+    const start = new Date(item.start_time);
+    const elapsed = now.value.getTime() - start.getTime();
+    if (elapsed >= 0 && elapsed <= GRACE_PERIOD_MS) return start;
+  }
+  return null;
+});
+
+const countdownState = computed<CountdownState>(() => {
+  if (countdownStateOverride) return countdownStateOverride;
+  if (isLive) return 'live';
+  if (graceTarget.value) return 'grace';
+  return 'countdown';
+});
+
+const countdown = computed(() => {
+  if (!showCountdown || countdownState.value !== 'countdown') {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+  if (!nextStreamStartTime.value) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+  const diff = nextStreamStartTime.value.getTime() - now.value.getTime();
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  return { days, hours, minutes, seconds };
+});
+
+watch(countdownState, (state, oldState) => {
+  if (state === 'grace' || state === 'live') {
+    startLivePolling?.();
+  } else if (oldState === 'grace' || oldState === 'live') {
+    stopLivePolling?.();
+  }
+}, { immediate: true });
+
+onUnmounted(() => {
+  stopLivePolling?.();
+});
 
 const scheduleLink = computed(() => {
   return `https://www.twitch.tv/${broadcasterName}/schedule`
@@ -246,3 +368,24 @@ watch(() => timeFontColor, (value) => {
   document.documentElement.style.setProperty('--extension-color-time-font-color', value)
 }, { immediate: true })
 </script>
+
+<style scoped>
+@reference 'tailwindcss';
+
+.countdown-label {
+  @apply relative text-xl font-bold after:text-(--extension-color-time-font-color) after:font-normal after:absolute after:-mb-2 after:bottom-0 after:text-[8px] after:left-1/2 after:-translate-x-1/2 after:uppercase;
+}
+
+.countdown-days::after {
+  --tw-content: v-bind('countdownTranslations.days');
+}
+.countdown-hours::after {
+  --tw-content: v-bind('countdownTranslations.hours');
+}
+.countdown-minutes::after {
+  --tw-content: v-bind('countdownTranslations.minutes');
+}
+.countdown-seconds::after {
+  --tw-content: v-bind('countdownTranslations.seconds');
+}
+</style>

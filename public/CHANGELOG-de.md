@@ -4,6 +4,7 @@
 
 ### Hinzugefügt
 - Du kannst nun bis zu 7 zukünftige Streams anzeigen.
+- Du kannst nun einen Countdown zum nächsten Streamstart anzeigen.
 
 ### Behoben
 – Wenn ein wiederkehrender Stream abgebrochen wird, versucht die Erweiterung nun, weitere nicht abgebrochene Streams zu finden, um weiterhin die konfigurierte Anzahl an Streams anzuzeigen.

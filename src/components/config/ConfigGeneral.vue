@@ -80,6 +80,16 @@
           {{ t('config.general.showStreamUsernames') }}
         </CustomLabel>
       </div>
+      <div class="flex flex-row gap-x-[8px]">
+        <input
+          type="checkbox"
+          id="showCountdown"
+          :checked="showCountdown"
+          @change="emits('update:showCountdown', ($event.target as HTMLInputElement).checked)" />
+        <CustomLabel id="showCountdown">
+          {{ t('config.general.showCountdown') }}
+        </CustomLabel>
+      </div>
     </div>
   </div>
 </template>
@@ -94,6 +104,7 @@ defineProps<{
   amountOfScheduleItems: number
   panelTitle: string
   showCategory: boolean
+  showCountdown: boolean
   showHeader: boolean
   showTimes: boolean
   showTitle: boolean
@@ -104,6 +115,7 @@ const emits = defineEmits<{
   (e: 'update:amountOfScheduleItems', value: number): void
   (e: 'update:panelTitle', value: string): void
   (e: 'update:showCategory', value: boolean): void
+  (e: 'update:showCountdown', value: boolean): void
   (e: 'update:showHeader', value: boolean): void
   (e: 'update:showTimes', value: boolean): void
   (e: 'update:showTitle', value: boolean): void
