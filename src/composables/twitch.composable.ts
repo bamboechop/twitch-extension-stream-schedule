@@ -14,6 +14,7 @@ import { themes } from '@/common/themes';
 import { useUrlSearchParams } from '@vueuse/core';
 
 const MAX_SCHEDULE_FETCHES = 3;
+const MAX_SCHEDULE_ITEMS = 7;
 
 // Store shared state outside the composable to persist between re-renders
 const allScheduleItems = ref<TwitchStreamScheduleSegment[]>([]);
@@ -107,13 +108,13 @@ export const useTwitch = () => {
       const now = new Date();
       const startTimeUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
       const startTimeRFC3339 = startTimeUTC.toISOString().replace('.000Z', 'Z');
-      const desired = config.value.amountOfScheduleItems;
+      const desired = urlParams.mode === 'config' ? MAX_SCHEDULE_ITEMS : config.value.amountOfScheduleItems;
 
       allScheduleItems.value = [];
       let cursor: string | null = null;
 
       for (let page = 0; page < MAX_SCHEDULE_FETCHES; page++) {
-        let url = `https://api.twitch.tv/helix/schedule?broadcaster_id=${channelId}&start_time=${startTimeRFC3339}&first=5`;
+        let url = `https://api.twitch.tv/helix/schedule?broadcaster_id=${channelId}&start_time=${startTimeRFC3339}&first=${MAX_SCHEDULE_ITEMS}`;
         if (cursor) {
           url += `&after=${cursor}`;
         }
@@ -163,7 +164,7 @@ export const useTwitch = () => {
         cursor = data.pagination.cursor;
       }
 
-      schedule.value = groupScheduleItems(desired);
+      schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];
@@ -179,6 +180,12 @@ export const useTwitch = () => {
 
   const saveConfig = async () => {
     try {
+      if (config.value.amountOfScheduleItems > 7) {
+        config.value.amountOfScheduleItems = 7;
+      }
+      if (config.value.amountOfScheduleItems < 1) {
+        config.value.amountOfScheduleItems = 1;
+      }
       window.Twitch.ext.configuration.set('broadcaster', '1', JSON.stringify(config.value));
     } catch (error) {
       console.error('Error saving config:', error);

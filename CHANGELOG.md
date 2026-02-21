@@ -2,6 +2,9 @@
 
 ## [1.4.0] - 2026-02-21
 
+### Added
+- You can show up to 7 upcoming streams now.
+
 ### Fixed
 - When a recurring stream is canceled the extension now tries to find more non-canceled streams to still display the configured amount of streams to be shown.
 

@@ -2,6 +2,9 @@
 
 ## [1.4.0] – 2026-02-21
 
+### Hinzugefügt
+- Du kannst nun bis zu 7 zukünftige Streams anzeigen.
+
 ### Behoben
 – Wenn ein wiederkehrender Stream abgebrochen wird, versucht die Erweiterung nun, weitere nicht abgebrochene Streams zu finden, um weiterhin die konfigurierte Anzahl an Streams anzuzeigen.
 

@@ -24,7 +24,7 @@
     "previewSchedule": "Sieh dir an, wie dein Stream-Zeitplan aussehen wird",
     "general": {
       "title": "Allgemein",
-      "numberOfItems": "Anzahl der Zeitplan-Einträge (1-5)",
+      "numberOfItems": "Anzahl der Zeitplan-Einträge (1-7)",
       "showHeader": "Panel-Titel anzeigen",
       "showStreamTitle": "Stream-Titel anzeigen",
       "showStreamCategory": "Stream-Kategorie anzeigen",

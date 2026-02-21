@@ -24,7 +24,7 @@
     "previewSchedule": "See how your stream schedule will look like",
     "general": {
       "title": "General",
-      "numberOfItems": "Number of schedule items (1-5)",
+      "numberOfItems": "Number of schedule items (1-7)",
       "showHeader": "Show panel title",
       "showStreamTitle": "Show stream title",
       "showStreamCategory": "Show stream category",

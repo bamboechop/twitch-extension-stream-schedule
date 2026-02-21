@@ -10,7 +10,7 @@
           id="amountOfScheduleItems"
           type="range"
           min="1"
-          max="5"
+          max="7"
           step="1"
           class="w-full"
           @input="emits('update:amountOfScheduleItems', parseInt(($event.target as HTMLInputElement).value))" />
