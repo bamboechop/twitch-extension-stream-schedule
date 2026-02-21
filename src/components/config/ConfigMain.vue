@@ -89,6 +89,7 @@ import ConfigPanelSelection from './ConfigPanelSelection.vue'
 import ConfigGeneral from './ConfigGeneral.vue'
 import ConfigAppearance from './ConfigAppearance.vue'
 import ConfigTypography from './ConfigTypography.vue'
+import type { TwitchExtensionTheme } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
 
@@ -135,7 +136,7 @@ const emits = defineEmits<{
   (e: 'update:show-times', value: boolean): void
   (e: 'update:show-title', value: boolean): void
   (e: 'update:show-usernames', value: boolean): void
-  (e: 'update:theme', value: string): void
+  (e: 'update:theme', value: TwitchExtensionTheme): void
   (e: 'update:time-font-color', value: string): void
   (e: 'update:vacation-background-color', value: string): void
   (e: 'update:vacation-font-color', value: string): void

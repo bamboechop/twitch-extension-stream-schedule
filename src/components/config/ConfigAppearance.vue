@@ -7,7 +7,7 @@
       <select
         id="theme"
         :value="theme"
-        @change="emits('update:theme', ($event.target as HTMLSelectElement).value)"
+        @change="emits('update:theme', ($event.target as HTMLSelectElement).value as TwitchExtensionTheme)"
         class="w-full text-[16px] bg-neutral-800 text-gray-100 border border-neutral-600 rounded-sm px-[12px] py-[8px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
         <option v-for="theme in groupedThemes.default" :key="theme" :value="theme" class="bg-neutral-800 text-gray-100">
           {{ t(`config.appearance.themes.${theme}`) }}
@@ -59,6 +59,7 @@ import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CustomLabel from '../common/CustomLabel.vue'
 import { themes } from '@/common/themes'
+import type { TwitchExtensionTheme } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
 
@@ -89,7 +90,7 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (e: 'update:theme', value: string): void
+  (e: 'update:theme', value: TwitchExtensionTheme): void
   (e: `update:${keyof typeof colorValues.value}`, value: string): void
 }>()
 
