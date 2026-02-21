@@ -8,6 +8,7 @@
 
 ### Fixed
 - When a recurring stream is canceled the extension now tries to find more non-canceled streams to still display the configured amount of streams to be shown.
+- Streams with an end time are no longer displayed when the end time is in the past.
 
 ## [1.3.1] - 2025-08-19
 

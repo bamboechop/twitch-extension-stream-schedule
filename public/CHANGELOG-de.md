@@ -8,6 +8,7 @@
 
 ### Behoben
 – Wenn ein wiederkehrender Stream abgebrochen wird, versucht die Erweiterung nun, weitere nicht abgebrochene Streams zu finden, um weiterhin die konfigurierte Anzahl an Streams anzuzeigen.
+- Streams mit einer Endzeit werden nicht mehr angezeigt, wenn die Endzeit in der Vergangenheit liegt.
 
 ## [1.3.1] - 2025-08-19
 
