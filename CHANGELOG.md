@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.0] - 2026-02-21
+
+### Fixed
+- When a recurring stream is canceled the extension now tries to find more non-canceled streams to still display the configured amount of streams to be shown.
+
 ## [1.3.1] - 2025-08-19
 
 ### Fixed

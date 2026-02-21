@@ -31,4 +31,4 @@ coverage
 *.tsbuildinfo
 
 # CHANGELOG files in public folder
-public/CHANGELOG*.md
+public/CHANGELOG.md

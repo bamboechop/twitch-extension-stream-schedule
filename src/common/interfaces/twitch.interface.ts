@@ -29,7 +29,7 @@ export interface TwitchStreamScheduleResponse {
     } | null;
   };
   pagination: {
-    cursor: string;
+    cursor?: string;
   };
 }
 

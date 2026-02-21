@@ -13,6 +13,8 @@ import { ref, watch } from 'vue';
 import { themes } from '@/common/themes';
 import { useUrlSearchParams } from '@vueuse/core';
 
+const MAX_SCHEDULE_FETCHES = 3;
+
 // Store shared state outside the composable to persist between re-renders
 const allScheduleItems = ref<TwitchStreamScheduleSegment[]>([]);
 const broadcasterName = ref<string>('');
@@ -105,36 +107,63 @@ export const useTwitch = () => {
       const now = new Date();
       const startTimeUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
       const startTimeRFC3339 = startTimeUTC.toISOString().replace('.000Z', 'Z');
-      const response = await window.fetch(`https://api.twitch.tv/helix/schedule?broadcaster_id=${channelId}&start_time=${startTimeRFC3339}&first=5`, {
-        headers: {
-          'Authorization': `Extension ${helixToken}`,
-          'Client-ID': clientId,
-        },
-      });
+      const desired = config.value.amountOfScheduleItems;
 
-      if (!response.ok) {
-        switch (response.status) {
-          case 401:
-            throw new Error('Authentication failed. Please refresh the page.');
-          case 403:
-            throw new Error('Not authorized to access this schedule.');
-          case 404:
-            // 404 means no schedule exists, we should handle this as a valid response
-            allScheduleItems.value = [];
-            schedule.value = [];
-            vacation.value = null;
-            return;
-          case 429:
-            throw new Error('Rate limit exceeded. Please try again later.');
-          default:
-            throw new Error('Failed to fetch schedule. Please try again later.');
+      allScheduleItems.value = [];
+      let cursor: string | null = null;
+
+      for (let page = 0; page < MAX_SCHEDULE_FETCHES; page++) {
+        let url = `https://api.twitch.tv/helix/schedule?broadcaster_id=${channelId}&start_time=${startTimeRFC3339}&first=5`;
+        if (cursor) {
+          url += `&after=${cursor}`;
         }
+
+        const response = await window.fetch(url, {
+          headers: {
+            'Authorization': `Extension ${helixToken}`,
+            'Client-ID': clientId,
+          },
+        });
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            if (page === 0) {
+              allScheduleItems.value = [];
+              schedule.value = [];
+              vacation.value = null;
+              return;
+            }
+            break;
+          }
+          switch (response.status) {
+            case 401:
+              throw new Error('Authentication failed. Please refresh the page.');
+            case 403:
+              throw new Error('Not authorized to access this schedule.');
+            case 429:
+              throw new Error('Rate limit exceeded. Please try again later.');
+            default:
+              throw new Error('Failed to fetch schedule. Please try again later.');
+          }
+        }
+
+        const data: TwitchStreamScheduleResponse = await response.json();
+
+        if (page === 0) {
+          vacation.value = data.data.vacation;
+        }
+
+        const nonCanceled = data.data.segments.filter(item => !item.canceled_until);
+        allScheduleItems.value.push(...nonCanceled);
+
+        if (allScheduleItems.value.length >= desired || !data.pagination?.cursor) {
+          break;
+        }
+
+        cursor = data.pagination.cursor;
       }
 
-      const data: TwitchStreamScheduleResponse = await response.json();
-      allScheduleItems.value = data.data.segments.filter(item => !item.canceled_until); // filter out canceled items
-      vacation.value = data.data.vacation;
-      schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
+      schedule.value = groupScheduleItems(desired);
     } catch (error) {
       console.error('Error fetching schedule:', error);
       allScheduleItems.value = [];
