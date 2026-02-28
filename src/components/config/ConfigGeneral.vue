@@ -63,6 +63,26 @@
       <div class="flex flex-row gap-x-[8px]">
         <input
           type="checkbox"
+          id="showCategoryBackgroundImage"
+          :checked="showCategoryBackgroundImage"
+          @change="emits('update:showCategoryBackgroundImage', ($event.target as HTMLInputElement).checked)" />
+        <CustomLabel id="showCategoryBackgroundImage">
+          {{ t('config.general.showCategoryBackgroundImage') }}
+        </CustomLabel>
+      </div>
+      <div class="flex flex-row gap-x-[8px]">
+        <input
+          type="checkbox"
+          id="showCategoryImage"
+          :checked="showCategoryImage"
+          @change="emits('update:showCategoryImage', ($event.target as HTMLInputElement).checked)" />
+        <CustomLabel id="showCategoryImage">
+          {{ t('config.general.showCategoryImage') }}
+        </CustomLabel>
+      </div>
+      <div class="flex flex-row gap-x-[8px]">
+        <input
+          type="checkbox"
           id="showTimes"
           :checked="showTimes"
           @change="emits('update:showTimes', ($event.target as HTMLInputElement).checked)" />
@@ -104,6 +124,8 @@ defineProps<{
   amountOfScheduleItems: number
   panelTitle: string
   showCategory: boolean
+  showCategoryBackgroundImage: boolean
+  showCategoryImage: boolean
   showCountdown: boolean
   showHeader: boolean
   showTimes: boolean
@@ -115,6 +137,8 @@ const emits = defineEmits<{
   (e: 'update:amountOfScheduleItems', value: number): void
   (e: 'update:panelTitle', value: string): void
   (e: 'update:showCategory', value: boolean): void
+  (e: 'update:showCategoryBackgroundImage', value: boolean): void
+  (e: 'update:showCategoryImage', value: boolean): void
   (e: 'update:showCountdown', value: boolean): void
   (e: 'update:showHeader', value: boolean): void
   (e: 'update:showTimes', value: boolean): void

@@ -12,6 +12,8 @@
               :amount-of-schedule-items="amountOfScheduleItems"
               :panel-title="panelTitle"
               :show-category="showCategory"
+              :show-category-background-image="showCategoryBackgroundImage"
+              :show-category-image="showCategoryImage"
               :show-countdown="showCountdown"
               :show-header="showHeader"
               :show-times="showTimes"
@@ -20,6 +22,8 @@
               @update:amount-of-schedule-items="emits('update:amount-of-schedule-items', $event)"
               @update:panel-title="emits('update:panel-title', $event)"
               @update:show-category="emits('update:show-category', $event)"
+              @update:show-category-background-image="emits('update:show-category-background-image', $event)"
+              @update:show-category-image="emits('update:show-category-image', $event)"
               @update:show-countdown="emits('update:show-countdown', $event)"
               @update:show-header="emits('update:show-header', $event)"
               @update:show-times="emits('update:show-times', $event)"
@@ -114,6 +118,8 @@ defineProps<{
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean
+  showCategoryBackgroundImage: boolean
+  showCategoryImage: boolean
   showCountdown: boolean
   showHeader: boolean
   showSuccessMessage: boolean
@@ -143,6 +149,8 @@ const emits = defineEmits<{
   (e: 'update:schedule-button-font-color', value: string): void
   (e: 'update:selected-view', value: 'general' | 'appearance' | 'typography'): void
   (e: 'update:show-category', value: boolean): void
+  (e: 'update:show-category-background-image', value: boolean): void
+  (e: 'update:show-category-image', value: boolean): void
   (e: 'update:show-countdown', value: boolean): void
   (e: 'update:show-header', value: boolean): void
   (e: 'update:show-times', value: boolean): void

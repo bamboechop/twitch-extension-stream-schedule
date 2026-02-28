@@ -18,6 +18,8 @@
         :schedule-button-font-color="config.scheduleButtonFontColor"
         :schedule-items="schedule"
         :show-category="config.showCategory"
+        :show-category-background-image="config.showCategoryBackgroundImage"
+        :show-category-image="config.showCategoryImage"
         :show-countdown="config.showCountdown"
         :show-header="config.showHeader"
         show-minimize-button

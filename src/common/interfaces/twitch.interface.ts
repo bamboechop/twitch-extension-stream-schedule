@@ -2,6 +2,7 @@ export interface TwitchStreamScheduleSegment {
   canceled_until: string | null;
   category: {
     id: string;
+    image_url?: string;
     name: string;
   } | null;
   end_time: string; // in RFC3339 format
@@ -101,6 +102,8 @@ export interface TwitchExtensionConfiguration extends TwitchExtensionThemeConfig
   lastSeenVersion?: string;
   panelTitle: string;
   showCategory: boolean;
+  showCategoryBackgroundImage: boolean;
+  showCategoryImage: boolean;
   showCountdown: boolean;
   showHeader: boolean;
   showTimes: boolean;

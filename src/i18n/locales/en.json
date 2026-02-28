@@ -43,6 +43,8 @@
       "showCountdown": "Show countdown to next stream",
       "showStreamTitle": "Show stream title",
       "showStreamCategory": "Show stream category",
+      "showCategoryBackgroundImage": "Show stream category background image",
+      "showCategoryImage": "Show stream category image",
       "showStreamTimes": "Show stream times",
       "showStreamUsernames": "Show usernames of people you play with during a stream",
       "panelTitle": "Panel title",
