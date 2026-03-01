@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.0] - 2026-02-28
+
+### Added
+- You can now show the stream category image next to your stream information.
+- You can now show the stream category image as background image behind your stream information.
+
 ## [1.4.0] - 2026-02-21
 
 ### Added

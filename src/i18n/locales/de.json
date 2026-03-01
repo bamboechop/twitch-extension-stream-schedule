@@ -43,6 +43,8 @@
       "showCountdown": "Countdown zum nächsten Stream anzeigen",
       "showStreamTitle": "Stream-Titel anzeigen",
       "showStreamCategory": "Stream-Kategorie anzeigen",
+      "showCategoryBackgroundImage": "Stream-Kategorie Hintergrundbild anzeigen",
+      "showCategoryImage": "Stream-Kategorie Bild anzeigen",
       "showStreamTimes": "Stream-Zeiten anzeigen",
       "showStreamUsernames": "Nutzernamen der Mitspieler anzeigen",
       "panelTitle": "Panel-Titel",

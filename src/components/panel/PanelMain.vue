@@ -78,17 +78,41 @@
               </div>
               <div class="flex flex-col gap-y-2">
                 <template v-for="item in group.items" :key="item.id">
-                  <div class="grid grid-cols-[1fr_90px] gap-x-3">
-                    <div class="flex flex-col grow gap-y-1">
+                  <div
+                    class="grid gap-x-3 bg-cover bg-center bg-no-repeat bg-blend-soft-light bg-(--extension-color-background)/85 rounded-md"
+                    :class="[itemGridColumnClass, { 'p-1': showCategoryBackgroundImage }]"
+                    :style="{
+                      'background-image': showCategoryBackgroundImage && item.category?.image_url?.startsWith('https://') ? `url(${item.category?.image_url})` : undefined,
+                    }">
+                    <template v-if="showCategoryImage">
+                      <img
+                        v-if="item.category?.image_url?.startsWith('https://')"
+                        :src="item.category.image_url"
+                        :alt="item.category.name"
+                        class="object-cover border-2 border-(--extension-color-day-border) rounded-sm" />
+                      <template v-else>
+                        <span></span>
+                      </template>
+                    </template>
+                    <div class="flex flex-col grow gap-y-1 min-w-0">
+                      <template v-if="showTimes">
+                        <div class="text-xs italic text-(--extension-color-time-font-color) flex items-stat gap-x-1 justify-end text-right mr-1">
+                          <AlarmClock class="mt-[2px] shrink-0" :size="fontSize * 0.75" />
+                          {{ formatTime(item.start_time) }}
+                          <template v-if="item.end_time">
+                            - {{ formatTime(item.end_time) }}
+                          </template>
+                        </div>
+                      </template>
                       <template v-if="showTitle && item.title">
                         <h3 class="text-lg font-bold">{{ item.title }}</h3>
                       </template>
                       <template v-if="showCategory && item.category">
-                        <div class="flex items-center gap-x-2">
+                        <div class="flex items-center gap-x-2 min-w-0">
                           <Tag class="shrink-0" :size="fontSize" />
                           <h4
                             class="font-bold"
-                            :class="{ 'text-lg': !showTitle, 'text-md': showTitle }">
+                            :class="{ 'text-lg': !showTitle, 'text-md': showTitle, 'text-xs': showCategoryImage }">
                             {{ item.category.name }}
                           </h4>
                         </div>
@@ -102,16 +126,6 @@
                         </div>
                       </template>
                     </div>
-                    <template v-if="showTimes">
-                      <div class="text-xs italic text-(--extension-color-time-font-color) flex items-stat gap-x-1 justify-end text-right">
-                        <AlarmClock class="mt-[2px] shrink-0" :size="fontSize * 0.75" />
-                        {{ formatTime(item.start_time) }}
-                        <template v-if="item.end_time">
-                          <br />
-                          {{ formatTime(item.end_time) }}
-                        </template>
-                      </div>
-                    </template>
                   </div>
                 </template>
               </div>
@@ -175,6 +189,8 @@ const {
   scheduleButtonFontColor,
   scheduleItems,
   showCategory,
+  showCategoryBackgroundImage,
+  showCategoryImage,
   showCountdown,
   showMinimizeButton = false,
   showTimes,
@@ -206,6 +222,8 @@ const {
   scheduleButtonFontColor: string
   scheduleItems: GroupedScheduleItem[]
   showCategory: boolean
+  showCategoryBackgroundImage: boolean
+  showCategoryImage: boolean
   showCountdown: boolean
   showHeader: boolean
   showMinimizeButton?: boolean
@@ -319,6 +337,14 @@ onUnmounted(() => {
 const scheduleLink = computed(() => {
   return `https://www.twitch.tv/${broadcasterName}/schedule`
 })
+
+/* static returned class strings to allow Tailwind to pick them up and provide the utility classes necessary */
+const itemGridColumnClass = computed(() => {
+  if (showCategoryImage) {
+    return 'grid-cols-[74px_minmax(0,_1fr)]';
+  }
+  return 'grid-cols-[minmax(0,_1fr)]';
+});
 
 function openSchedule() {
   window.open(scheduleLink.value, '_blank')

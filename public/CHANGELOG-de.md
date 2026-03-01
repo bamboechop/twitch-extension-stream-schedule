@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## [1.5.0] - 2026-02-28
+
+### Hinzugefügt
+- Du kannst nun das Bild der Stream Kategorie neben deinen Stream Informationen anzeigen.
+- Du kannst nun das Bild der Stream Kategorie als Hintergrund Bild hinter deinen Stream Informationen anzeigen.
+
 ## [1.4.0] – 2026-02-21
 
 ### Hinzugefügt

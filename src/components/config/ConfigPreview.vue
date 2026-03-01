@@ -42,6 +42,8 @@
           :schedule-button-font-color="scheduleButtonFontColor"
           :schedule-items="schedule"
           :show-category="showCategory"
+          :show-category-background-image="showCategoryBackgroundImage"
+          :show-category-image="showCategoryImage"
           :show-countdown="showCountdown"
           :show-header="showHeader"
           :show-times="showTimes"
@@ -91,6 +93,8 @@ const props = defineProps<{
   scheduleButtonBackgroundColor: string
   scheduleButtonFontColor: string
   showCategory: boolean
+  showCategoryBackgroundImage: boolean
+  showCategoryImage: boolean
   showCountdown: boolean
   showHeader: boolean
   showTimes: boolean

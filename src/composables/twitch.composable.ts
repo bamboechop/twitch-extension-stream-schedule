@@ -28,7 +28,9 @@ const config = ref<TwitchExtensionConfiguration>({
   lastSeenVersion: undefined,
   panelTitle: '',
   showCategory: true,
-  showCountdown: true,
+  showCategoryBackgroundImage: false,
+  showCategoryImage: false,
+  showCountdown: false,
   showHeader: true,
   showTimes: true,
   showTitle: true,
@@ -107,6 +109,44 @@ export const useTwitch = () => {
     }
   }
 
+  const fetchCategoryImages = async (
+    scheduleItems: TwitchStreamScheduleSegment[],
+    { clientId, helixToken }: Pick<TwitchExtensionAuthResponse, 'clientId' | 'helixToken'>
+  ) => {
+    const categoryIds = [...new Set(
+      scheduleItems
+        .map(item => item.category?.id)
+        .filter((id): id is string => Boolean(id))
+    )];
+
+    if (categoryIds.length === 0) {
+      return;
+    }
+
+    const gameIdsQuery = categoryIds.map(id => `id=${encodeURIComponent(id)}`).join('&');
+    const response = await window.fetch(`https://api.twitch.tv/helix/games?${gameIdsQuery}`, {
+      headers: {
+        'Authorization': `Extension ${helixToken}`,
+        'Client-ID': clientId,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch category images.');
+    }
+
+    const gamesData: { data: { id: string; box_art_url: string }[] } = await response.json();
+    const gameImageMap = new Map(
+      gamesData.data.map(game => [game.id, game.box_art_url.replace('{width}', '357').replace('{height}', '500')])
+    );
+
+    scheduleItems.forEach(item => {
+      if (!item.category) return;
+      const imageUrl = gameImageMap.get(item.category.id);
+      item.category.image_url = imageUrl;
+    });
+  };
+
   const fetchSchedule = async ({ channelId, clientId, helixToken }: Pick<TwitchExtensionAuthResponse, 'channelId' | 'clientId' | 'helixToken'>) => {
     try {
       const now = new Date();
@@ -170,6 +210,10 @@ export const useTwitch = () => {
         }
 
         cursor = data.pagination.cursor;
+      }
+
+      if (urlParams.mode === 'config' || config.value.showCategoryImage || config.value.showCategoryBackgroundImage) {
+        await fetchCategoryImages(allScheduleItems.value, { clientId, helixToken });
       }
 
       schedule.value = groupScheduleItems(config.value.amountOfScheduleItems);
@@ -286,6 +330,8 @@ export const useTwitch = () => {
         lastSeenVersion: currentConfig.lastSeenVersion,
         panelTitle: currentConfig.panelTitle,
         showCategory: currentConfig.showCategory,
+        showCategoryBackgroundImage: currentConfig.showCategoryBackgroundImage,
+        showCategoryImage: currentConfig.showCategoryImage,
         showCountdown: currentConfig.showCountdown,
         showTimes: currentConfig.showTimes,
         showTitle: currentConfig.showTitle,
