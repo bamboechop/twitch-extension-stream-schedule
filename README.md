@@ -2,7 +2,7 @@
 
 A highly customizable Twitch extension that displays a streamer's schedule in their panel with beautiful themes and extensive configuration options. Built with Vue 3, TypeScript, and Tailwind CSS.
 
-<img src=".github/assets/logo.png" alt="Upcoming Streams Logo" width="300"/>
+<img src=".github/assets/discovery-image.png" alt="Upcoming Streams Logo" width="300"/>
 
 📦 [Install on Twitch](https://dashboard.twitch.tv/extensions/fx3l6f5p9rssmjsbn4k0s8zq94rd85)
 
