@@ -11,3 +11,5 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: "@types/node"
+    assignees:
+      - "bamboechop"
