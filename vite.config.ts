@@ -25,7 +25,7 @@ export default defineConfig(({ command }) => {
   return {
     base: isProduction ? './' : '/',
     build: {
-      rollupOptions: {
+      rolldownOptions: {
         input: isProduction ? buildInputs : developmentInputs,
         output: {
           assetFileNames: '[name]-[hash:8].[ext]',
