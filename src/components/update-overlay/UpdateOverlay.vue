@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { X } from 'lucide-vue-next';
+import { X } from '@lucide/vue';
 import { useChangelog } from '@/composables/changelog.composable';
 import { useI18n } from 'vue-i18n';
 

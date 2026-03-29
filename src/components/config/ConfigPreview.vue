@@ -74,7 +74,7 @@ import { useI18n } from 'vue-i18n'
 import PanelMain from '../panel/PanelMain.vue'
 import { useTwitch } from '@/composables/twitch.composable';
 import CustomLoader from '../common/CustomLoader.vue';
-import { BadgeInfo } from 'lucide-vue-next';
+import { BadgeInfo } from '@lucide/vue';
 import type { CountdownState } from '@/common/interfaces/twitch.interface';
 
 const { t } = useI18n({ useScope: 'global' })

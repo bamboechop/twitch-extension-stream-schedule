@@ -16,11 +16,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@lucide/vue": "^1.7.0",
     "@tailwindcss/vite": "^4.2.2",
     "@vueuse/core": "^14.2.1",
-    "lucide-vue-next": "^0.577.0",
     "tailwindcss": "^4.2.2",
-    "vue": "^3.5.30",
+    "vue": "^3.5.31",
     "vue-i18n": "^11.3.0"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "jiti": "^2.6.1",
     "npm-run-all2": "^8.0.4",
     "typescript": "~5.9.3",
-    "vite": "^8.0.1",
+    "vite": "^8.0.3",
     "vite-plugin-vue-devtools": "^8.1.1",
     "vue-tsc": "^3.2.5"
   },

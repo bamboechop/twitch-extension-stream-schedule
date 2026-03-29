@@ -94,7 +94,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Check, Save } from 'lucide-vue-next'
+import { Check, Save } from '@lucide/vue'
 import ConfigPanelSelection from './ConfigPanelSelection.vue'
 import ConfigGeneral from './ConfigGeneral.vue'
 import ConfigAppearance from './ConfigAppearance.vue'

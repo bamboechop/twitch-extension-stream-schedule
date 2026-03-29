@@ -166,7 +166,7 @@
 import { computed, onUnmounted, watch } from 'vue'
 import { useNow, useUrlSearchParams } from '@vueuse/core';
 import { useI18n } from 'vue-i18n'
-import { AlarmClock, Radio, SquareX, Tag, User } from 'lucide-vue-next'
+import { AlarmClock, Radio, SquareX, Tag, User } from '@lucide/vue'
 import type { CountdownState, GroupedScheduleItem, TwitchUrlSearchParams, TwitchStreamScheduleResponse } from '@/common/interfaces/twitch.interface'
 
 const { t } = useI18n({ useScope: 'global' })
